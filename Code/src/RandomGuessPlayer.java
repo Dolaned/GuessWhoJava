@@ -1,13 +1,13 @@
 import java.io.*;
 
 /**
- * Binary-search based guessing player.
- * This player is for task C.
+ * Random guessing player.
+ * This player is for task B.
  *
  * You may implement/extend other interfaces or classes, but ensure ultimately
  * that this class implements the Player interface (directly or indirectly).
  */
-public class BinaryGuessPlayer implements Player
+public class RandomGuessPlayer implements Player
 {
 
     /**
@@ -21,11 +21,11 @@ public class BinaryGuessPlayer implements Player
      *    the "throws IOException" method specification, but make sure your
      *    implementation exits gracefully if an IOException is thrown.
      */
-    public BinaryGuessPlayer(String gameFilename, String chosenName)
+    public RandomGuessPlayer(String gameFilename, String chosenName)
         throws IOException
     {
 
-    } // end of BinaryGuessPlayer()
+    } // end of RandomGuessPlayer()
 
 
     public Guess guess() {
@@ -35,7 +35,9 @@ public class BinaryGuessPlayer implements Player
     } // end of guess()
 
 
-	public boolean answer(Guess currGuess) {
+    public boolean answer(Guess currGuess) {
+
+
 
         // placeholder, replace
         return false;
@@ -48,4 +50,4 @@ public class BinaryGuessPlayer implements Player
         return true;
     } // end of receiveAnswer()
 
-} // end of class BinaryGuessPlayer
+} // end of class RandomGuessPlayer

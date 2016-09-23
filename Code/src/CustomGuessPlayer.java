@@ -1,13 +1,13 @@
 import java.io.*;
 
 /**
- * Random guessing player.
- * This player is for task B.
+ * Your customised guessing player.
+ * This player is for bonus task.
  *
  * You may implement/extend other interfaces or classes, but ensure ultimately
  * that this class implements the Player interface (directly or indirectly).
  */
-public class RandomGuessPlayer implements Player
+public class CustomGuessPlayer implements Player
 {
 
     /**
@@ -21,11 +21,11 @@ public class RandomGuessPlayer implements Player
      *    the "throws IOException" method specification, but make sure your
      *    implementation exits gracefully if an IOException is thrown.
      */
-    public RandomGuessPlayer(String gameFilename, String chosenName)
+    public CustomGuessPlayer(String gameFilename, String chosenName)
         throws IOException
     {
 
-    } // end of RandomGuessPlayer()
+    } // end of CustomGuessPlayer()
 
 
     public Guess guess() {
@@ -44,8 +44,11 @@ public class RandomGuessPlayer implements Player
 
 	public boolean receiveAnswer(Guess currGuess, boolean answer) {
 
+
+        if(currGuess.GuessType == G )
+
         // placeholder, replace
         return true;
     } // end of receiveAnswer()
 
-} // end of class RandomGuessPlayer
+} // end of class CustomGuessPlayer
