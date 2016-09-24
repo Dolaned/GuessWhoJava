@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * Random guessing player.
@@ -17,7 +18,10 @@ public class RandomGuessPlayer implements Player
 
     //collection of attribute pairs the above might have
     ArrayList<AttributePair> attributePairs = new ArrayList<>();
+    //current lpayer selected
     Person currentPlayer;
+    //random class to randomly pick an attribute.
+    private Random randomGenerator = new Random();
 
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
@@ -50,18 +54,19 @@ public class RandomGuessPlayer implements Player
 
     public Guess guess() {
 
-
-        if(peopleMap.size() > 1){
+        if(this.peopleMap.size() > 1){
 
             //pick random attribute from attribute list.
+            int index = this.randomGenerator.nextInt(this.attributePairs.size());
+            AttributePair pair = this.attributePairs.get(index);
+
             //remove it from list and ask it as a guess.
-
-
+            this.attributePairs.remove(index);
+            return new Guess(Guess.GuessType.Attribute, pair.getAttribute(), pair.getValue());
 
         }else{
             return new Guess(Guess.GuessType.Person, "", peopleMap.entrySet().iterator().next().getValue().getPlayerName());
         }
-        return new Guess(Guess.GuessType.Person, "", "Placeholder");
     } // end of guess()
 
 
@@ -87,6 +92,8 @@ public class RandomGuessPlayer implements Player
 
         //receive guess and answer
         //for each player in player map, check current guess attribute and remove from person queue
+
+
         // placeholder, replace
         return true;
     } // end of receiveAnswer()
