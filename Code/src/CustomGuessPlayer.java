@@ -45,7 +45,6 @@ public class CustomGuessPlayer implements Player
 	public boolean receiveAnswer(Guess currGuess, boolean answer) {
 
 
-        if(currGuess.GuessType == G )
 
         // placeholder, replace
         return true;

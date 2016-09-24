@@ -1,0 +1,11 @@
+Step by step breakdown of binary implementation.
+
+Step one, read in file and for the attribute setup create a tree using the attribute as the rootnode and key
+push this to the hashmap.
+
+
+use guesses attribute to pull the correct decision tree from the hashmap.
+remove any players that contain the guessed attribute based on a yes ,  no answer.
+traverse all other trees and remove that player from all attribute trees.
+
+keep an array list of players still in the game.

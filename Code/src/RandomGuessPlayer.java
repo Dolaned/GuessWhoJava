@@ -1,4 +1,7 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Random guessing player.
@@ -9,6 +12,12 @@ import java.io.*;
  */
 public class RandomGuessPlayer implements Player
 {
+    //collection of people to guess from
+    HashMap<String, Person> peopleMap = new HashMap<>();
+
+    //collection of attribute pairs the above might have
+    ArrayList<AttributePair> attributePairs = new ArrayList<>();
+    Person currentPlayer;
 
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
@@ -22,23 +31,51 @@ public class RandomGuessPlayer implements Player
      *    implementation exits gracefully if an IOException is thrown.
      */
     public RandomGuessPlayer(String gameFilename, String chosenName)
-        throws IOException
     {
+        int lineCounter = 0;
+        try {
+            BufferedReader assignedReader = new BufferedReader(new FileReader(gameFilename));
+            String line = null;
+            while ((line = assignedReader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
 
+        //assign the current player to one of the inputted players.
+        this.currentPlayer = peopleMap.get(chosenName);
     } // end of RandomGuessPlayer()
 
 
     public Guess guess() {
 
-        // placeholder, replace
+
+        if(peopleMap.size() > 1){
+
+            //pick random attribute from attribute list.
+            //remove it from list and ask it as a guess.
+
+
+
+        }else{
+            return new Guess(Guess.GuessType.Person, "", peopleMap.entrySet().iterator().next().getValue().getPlayerName());
+        }
         return new Guess(Guess.GuessType.Person, "", "Placeholder");
     } // end of guess()
 
 
     public boolean answer(Guess currGuess) {
 
+        ArrayList<AttributePair> currentAttr = this.currentPlayer.getPairs();
 
-
+        for(AttributePair pair: currentAttr){
+            if(Objects.equals(pair.getAttribute(), currGuess.getAttribute())){
+                if(Objects.equals(pair.getValue(), currGuess.getValue())){
+                    return true;
+                }
+            }
+        }
         // placeholder, replace
         return false;
     } // end of answer()
@@ -46,6 +83,10 @@ public class RandomGuessPlayer implements Player
 
 	public boolean receiveAnswer(Guess currGuess, boolean answer) {
 
+
+
+        //receive guess and answer
+        //for each player in player map, check current guess attribute and remove from person queue
         // placeholder, replace
         return true;
     } // end of receiveAnswer()
