@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Random guessing player.
@@ -36,15 +33,15 @@ public class RandomGuessPlayer implements Player
      */
     public RandomGuessPlayer(String gameFilename, String chosenName)
     {
-        int lineCounter = 0;
+        FileHandler fileHandler = FileHandler.getInstance();
+
         try {
-            BufferedReader assignedReader = new BufferedReader(new FileReader(gameFilename));
-            String line = null;
-            while ((line = assignedReader.readLine()) != null) {
-                System.out.println(line);
-            }
+            fileHandler.parseFile(gameFilename);
+            this.peopleMap = fileHandler.getPeopleMap();
+            this.attributePairs = fileHandler.getAttributePairs();
+
         } catch (IOException e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
 
         //assign the current player to one of the inputted players.
@@ -89,13 +86,38 @@ public class RandomGuessPlayer implements Player
 	public boolean receiveAnswer(Guess currGuess, boolean answer) {
 
 
+        if(currGuess.getType() == Guess.GuessType.Person){
+            if(answer){
+                return true;
+            }
+        }else{
+            if(answer){
+                ArrayList<String> marked = new ArrayList<>();
 
-        //receive guess and answer
-        //for each player in player map, check current guess attribute and remove from person queue
+                for (Map.Entry<String, Person> entry : this.peopleMap.entrySet()){
 
+                    Person p = entry.getValue();
+                    ArrayList<AttributePair> personAttributes = p.getPairs();
+                    Boolean hasAttribute = false;
+                    for(AttributePair pair : personAttributes){
+                        if(Objects.equals(pair.getAttribute(), currGuess.getAttribute())){
+                            if(Objects.equals(pair.getValue(), currGuess.getAttribute())){
+                                hasAttribute = true;
+                            }
+                        }
+                    }
 
+                    if(!hasAttribute){
+                        marked.add(entry.getKey());
+                    }
+                }
+                for(String s : marked){
+                    this.peopleMap.remove(s);
+                }
+            }
+        }
         // placeholder, replace
-        return true;
+        return false;
     } // end of receiveAnswer()
 
 } // end of class RandomGuessPlayer
