@@ -1,5 +1,8 @@
+package classes;
+
+import classes.AttributePair;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by dylanaird on 24/09/2016.

@@ -9,7 +9,7 @@ public class Guess
 	/**
 	 * Enum of the two types of guess in game.
 	 * Attribute ("does your chosen person have attribute eyeColour with value blue?")
-	 * Person ("Is your chosen person Ms X?")
+	 * classes.Person ("Is your chosen person Ms X?")
 	 * When constructing a Guess object, set this to the appropriate type of guess.
 	 */
 	public static enum GuessType {
@@ -23,7 +23,7 @@ public class Guess
 	protected String mAttribute;
 	/** Value.
 	 *  if mType = Attribute, then it is the value of the associated attribute).
-	 *  if mType = Person, then this is the guessed person's name.
+	 *  if mType = classes.Person, then this is the guessed person's name.
 	 */
 	protected String mValue;
 
@@ -36,7 +36,7 @@ public class Guess
 	 *    Guess(Guess.GuessType.Attribute, attr, val)
 	 * If asking if the opponent's chosen person is a particular person (X for example),
 	 * then constructor should be called as follows:
-	 *    Guess(Guess.GuessType.Person, "", X)
+	 *    Guess(Guess.GuessType.classes.Person, "", X)
 	 *
 	 * @param type Type of guess.
 	 * @param attribute Attribute of guess.

@@ -1,11 +1,10 @@
-import com.sun.source.tree.Tree;
+import classes.AttributePair;
+import classes.FileHandler;
+import classes.Person;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.TreeMap;
 
 /**
  * Binary-search based guessing player.

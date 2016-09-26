@@ -33,7 +33,7 @@ public interface Player
 	 * @param currGuess This player's initial guess.
 	 * @param answer Opponent's answer to guess.
 	 *
-	 * @return True if player made a Person guess and it was true.  In other words,
+	 * @return True if player made a classes.Person guess and it was true.  In other words,
 	 *   this player has guessed opponent's chosen person and this player has
 	 *   finished.  Otherwise return false.
 	 */
