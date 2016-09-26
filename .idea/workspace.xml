@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="54c4d6cd-dce6-488b-b51f-d726b9f6658d" name="Default" comment="fixed file structure&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/src/FileHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gamefiles/game1.chosen" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gamefiles/game1.config" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/AAassignment2.iml" afterPath="$PROJECT_DIR$/.idea/AAassignment2.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list default="true" id="54c4d6cd-dce6-488b-b51f-d726b9f6658d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/Code.iml" afterPath="$PROJECT_DIR$/Code/Code.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/src/FileHandler.java" afterPath="$PROJECT_DIR$/Code/src/FileHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/src/RandomGuessPlayer.java" afterPath="$PROJECT_DIR$/Code/src/RandomGuessPlayer.java" />
     </list>
     <ignored path="AAassignment2.iws" />
@@ -36,8 +29,8 @@
       <file leaf-file-name="RandomGuessPlayer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/src/RandomGuessPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+            <state relative-caret-position="318">
+              <caret line="116" column="58" selection-start-line="116" selection-start-column="58" selection-end-line="116" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -45,22 +38,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/src/FileHandler.java">
+      <file leaf-file-name="output.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/output.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#680#681#0" expanded="true" />
-                <element signature="e#712#713#0" expanded="true" />
-                <element signature="e#779#780#0" expanded="true" />
-                <element signature="e#821#822#0" expanded="true" />
-                <element signature="e#880#881#0" expanded="true" />
-                <element signature="e#917#918#0" expanded="true" />
-                <element signature="e#995#996#0" expanded="true" />
-                <element signature="e#1047#1048#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="45">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="game1.config" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gamefiles/game1.config">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -68,8 +61,8 @@
       <file leaf-file-name="Guess.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/src/Guess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
               <folding>
                 <element signature="e#1728#1729#0" expanded="true" />
                 <element signature="e#1748#1749#0" expanded="true" />
@@ -91,23 +84,11 @@
       <file leaf-file-name="Person.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/src/Person.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+            <state relative-caret-position="60">
+              <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
               <folding>
                 <element signature="e#372#373#0" expanded="true" />
                 <element signature="e#408#409#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GuessWho.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/src/GuessWho.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -993,7 +974,7 @@
       <updated>1474634049548</updated>
       <workItem from="1474634051236" duration="2774000" />
       <workItem from="1474640279464" duration="4149000" />
-      <workItem from="1474649535965" duration="18267000" />
+      <workItem from="1474649535965" duration="23311000" />
     </task>
     <task id="LOCAL-00001" summary="fixed file structure&#10;">
       <created>1474640671227</created>
@@ -1016,15 +997,22 @@
       <option name="project" value="LOCAL" />
       <updated>1474691897648</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="main random implementation 90% working need to fix logic">
+      <created>1474817641167</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1474817641167</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25190000" />
+    <option name="totallyTimeSpent" value="30234000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="24" width="1280" height="737" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1066,7 +1054,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed file structure&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed file structure&#10;" />
+    <MESSAGE value="main random implementation 90% working need to fix logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="main random implementation 90% working need to fix logic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1236,38 +1225,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gamefiles/game1.chosen">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gamefiles/game1.config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/src/BinaryGuessPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/src/Guess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1728#1729#0" expanded="true" />
-            <element signature="e#1748#1749#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1279,10 +1241,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gamefiles/game1.chosen">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="4" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/src/Guess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="e#1728#1729#0" expanded="true" />
+            <element signature="e#1748#1749#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/src/GuessWho.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/src/Person.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+        <state relative-caret-position="60">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
           <folding>
             <element signature="e#372#373#0" expanded="true" />
             <element signature="e#408#409#0" expanded="true" />
@@ -1292,44 +1283,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/output.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="45">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/src/GuessWho.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/src/FileHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="153">
+          <caret line="57" column="34" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#680#681#0" expanded="true" />
-            <element signature="e#712#713#0" expanded="true" />
-            <element signature="e#779#780#0" expanded="true" />
-            <element signature="e#821#822#0" expanded="true" />
-            <element signature="e#880#881#0" expanded="true" />
-            <element signature="e#917#918#0" expanded="true" />
-            <element signature="e#995#996#0" expanded="true" />
-            <element signature="e#1047#1048#0" expanded="true" />
+            <element signature="e#463#464#0" expanded="true" />
+            <element signature="e#495#496#0" expanded="true" />
+            <element signature="e#562#563#0" expanded="true" />
+            <element signature="e#604#605#0" expanded="true" />
+            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#700#701#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#830#831#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gamefiles/game1.config">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/src/RandomGuessPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+        <state relative-caret-position="318">
+          <caret line="116" column="58" selection-start-line="116" selection-start-column="58" selection-end-line="116" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -7,23 +7,12 @@ import java.util.HashMap;
  * Created by dylanaird on 25/09/2016.
  */
 public class FileHandler {
-    private static FileHandler instance = null;
     private HashMap<String, Person> peopleMap = new HashMap<>();
 
     //collection of attribute pairs the above might have
     private ArrayList<AttributePair> attributePairs = new ArrayList<>();
 
-    protected FileHandler(){
-
-    }
-
-
-    public static FileHandler getInstance(){
-        if(instance == null){
-            instance = new FileHandler();
-        }
-        return instance;
-    }
+    public FileHandler(){}
 
     public HashMap<String, Person> getPeopleMap() {
         return peopleMap;
@@ -69,10 +58,8 @@ public class FileHandler {
                     attributePairs.add(new AttributePair(lineArray[0], lineArray[i]));
                 }
             }
-            if(br.readLine() == null){
-                peopleMap.put(person.getPlayerName(), person);
-            }
         }
+        peopleMap.put(person.getPlayerName(), person);
         br.close();
     }
 

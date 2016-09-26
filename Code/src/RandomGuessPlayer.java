@@ -1,22 +1,21 @@
-import java.io.*;
+import java.io.IOException;
 import java.util.*;
 
 /**
  * Random guessing player.
  * This player is for task B.
- *
+ * <p>
  * You may implement/extend other interfaces or classes, but ensure ultimately
  * that this class implements the Player interface (directly or indirectly).
  */
-public class RandomGuessPlayer implements Player
-{
+public class RandomGuessPlayer implements Player {
     //collection of people to guess from
-    HashMap<String, Person> peopleMap = new HashMap<>();
+    private HashMap<String, Person> peopleMap = new HashMap<>();
 
     //collection of attribute pairs the above might have
-    ArrayList<AttributePair> attributePairs = new ArrayList<>();
+    private ArrayList<AttributePair> attributePairs = new ArrayList<>();
     //current lpayer selected
-    Person currentPlayer;
+    private Person currentPlayer;
     //random class to randomly pick an attribute.
     private Random randomGenerator = new Random();
 
@@ -25,15 +24,14 @@ public class RandomGuessPlayer implements Player
      * person.
      *
      * @param gameFilename Filename of game configuration.
-     * @param chosenName Name of the chosen person for this player.
+     * @param chosenName   Name of the chosen person for this player.
      * @throws IOException If there are IO issues with loading of gameFilename.
-     *    Note you can handle IOException within the constructor and remove
-     *    the "throws IOException" method specification, but make sure your
-     *    implementation exits gracefully if an IOException is thrown.
+     *                     Note you can handle IOException within the constructor and remove
+     *                     the "throws IOException" method specification, but make sure your
+     *                     implementation exits gracefully if an IOException is thrown.
      */
-    public RandomGuessPlayer(String gameFilename, String chosenName)
-    {
-        FileHandler fileHandler = FileHandler.getInstance();
+    public RandomGuessPlayer(String gameFilename, String chosenName) {
+        FileHandler fileHandler = new FileHandler();
 
         try {
             fileHandler.parseFile(gameFilename);
@@ -48,10 +46,9 @@ public class RandomGuessPlayer implements Player
         this.currentPlayer = peopleMap.get(chosenName);
     } // end of RandomGuessPlayer()
 
-
     public Guess guess() {
 
-        if(this.peopleMap.size() > 1){
+        if (this.peopleMap.size() > 1) {
 
             //pick random attribute from attribute list.
             int index = this.randomGenerator.nextInt(this.attributePairs.size());
@@ -61,59 +58,63 @@ public class RandomGuessPlayer implements Player
             this.attributePairs.remove(index);
             return new Guess(Guess.GuessType.Attribute, pair.getAttribute(), pair.getValue());
 
-        }else{
+        } else {
             return new Guess(Guess.GuessType.Person, "", peopleMap.entrySet().iterator().next().getValue().getPlayerName());
         }
     } // end of guess()
 
-
     public boolean answer(Guess currGuess) {
 
-        ArrayList<AttributePair> currentAttr = this.currentPlayer.getPairs();
+        if (currGuess.getType() == Guess.GuessType.Person) {
+            if (currGuess.getValue().equals(this.currentPlayer.getPlayerName())) {
+                return true;
+            }
+        } else {
+            ArrayList<AttributePair> currentAttr = this.currentPlayer.getPairs();
 
-        for(AttributePair pair: currentAttr){
-            if(Objects.equals(pair.getAttribute(), currGuess.getAttribute())){
-                if(Objects.equals(pair.getValue(), currGuess.getValue())){
-                    return true;
+            for (AttributePair pair : currentAttr) {
+                if (pair.getAttribute().equals(currGuess.getAttribute())) {
+                    if (pair.getValue().equals(currGuess.getValue())) {
+                        return true;
+                    }
                 }
             }
         }
-        // placeholder, replace
         return false;
     } // end of answer()
 
 
-	public boolean receiveAnswer(Guess currGuess, boolean answer) {
+    public boolean receiveAnswer(Guess currGuess, boolean answer) {
 
-
-        if(currGuess.getType() == Guess.GuessType.Person){
-            if(answer){
+        if (currGuess.getType() == Guess.GuessType.Person) {
+            if (answer) {
                 return true;
             }
-        }else{
-            if(answer){
+        } else {
+            if (answer) {
                 ArrayList<String> marked = new ArrayList<>();
 
-                for (Map.Entry<String, Person> entry : this.peopleMap.entrySet()){
+                for (Map.Entry<String, Person> entry : this.peopleMap.entrySet()) {
 
                     Person p = entry.getValue();
-                    ArrayList<AttributePair> personAttributes = p.getPairs();
                     Boolean hasAttribute = false;
-                    for(AttributePair pair : personAttributes){
-                        if(Objects.equals(pair.getAttribute(), currGuess.getAttribute())){
-                            if(Objects.equals(pair.getValue(), currGuess.getAttribute())){
+                    for(AttributePair pair : p.getPairs()){
+
+                        if(pair.getAttribute().toString().equals(currGuess.getAttribute().toString())){
+                            if(pair.getValue().toString().equals(currGuess.getValue().toString())){
                                 hasAttribute = true;
                             }
                         }
                     }
-
-                    if(!hasAttribute){
+                    if (!hasAttribute) {
                         marked.add(entry.getKey());
                     }
                 }
-                for(String s : marked){
+                for (String s : marked) {
+                    System.out.println("Removing : " + s);
                     this.peopleMap.remove(s);
                 }
+                System.out.println(this.peopleMap.size());
             }
         }
         // placeholder, replace
