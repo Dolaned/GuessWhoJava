@@ -1,5 +1,8 @@
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Random guessing player.
@@ -98,10 +101,10 @@ public class RandomGuessPlayer implements Player {
 
                     Person p = entry.getValue();
                     Boolean hasAttribute = false;
-                    for(AttributePair pair : p.getPairs()){
+                    for (AttributePair pair : p.getPairs()) {
 
-                        if(pair.getAttribute().toString().equals(currGuess.getAttribute().toString())){
-                            if(pair.getValue().toString().equals(currGuess.getValue().toString())){
+                        if (pair.getAttribute().equals(currGuess.getAttribute())) {
+                            if (pair.getValue().equals(currGuess.getValue())) {
                                 hasAttribute = true;
                             }
                         }
@@ -111,10 +114,9 @@ public class RandomGuessPlayer implements Player {
                     }
                 }
                 for (String s : marked) {
-                    System.out.println("Removing : " + s);
+                    //System.out.println("Removing : " + s);
                     this.peopleMap.remove(s);
                 }
-                System.out.println(this.peopleMap.size());
             }
         }
         // placeholder, replace

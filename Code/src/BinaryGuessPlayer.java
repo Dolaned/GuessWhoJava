@@ -3,6 +3,7 @@ import com.sun.source.tree.Tree;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
@@ -15,10 +16,13 @@ import java.util.TreeMap;
  */
 public class BinaryGuessPlayer implements Player {
 
-    HashMap<String, Tree> attributeCollection = new HashMap<>();
-    HashMap<String, Boolean> hasAttributeMap = new HashMap<>();
-    HashMap<String, Person> peopleMap = new HashMap<>();
-    Person currentPlayer;
+    //collection of people to guess from
+    private HashMap<String, Person> peopleMap = new HashMap<>();
+
+    //collection of attribute pairs the above might have
+    private ArrayList<AttributePair> attributePairs = new ArrayList<>();
+    //current lpayer selected
+    private Person currentPlayer;
 
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
@@ -32,17 +36,16 @@ public class BinaryGuessPlayer implements Player {
      *                     implementation exits gracefully if an IOException is thrown.
      */
     public BinaryGuessPlayer(String gameFilename, String chosenName) {
-        int lineCounter = 0;
-        try {
-            BufferedReader assignedReader = new BufferedReader(new FileReader(gameFilename));
-            String line = null;
-            while ((line = assignedReader.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }
+        FileHandler fileHandler = new FileHandler();
 
+        try {
+            fileHandler.parseFile(gameFilename);
+            this.peopleMap = fileHandler.getPeopleMap();
+            this.attributePairs = fileHandler.getAttributePairs();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //assign the current player to one of the inputted players.
         this.currentPlayer = peopleMap.get(chosenName);
