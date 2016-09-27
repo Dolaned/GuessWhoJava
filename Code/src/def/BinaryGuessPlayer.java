@@ -1,3 +1,5 @@
+package def;
+
 import classes.AttributePair;
 import classes.FileHandler;
 import classes.Person;
@@ -11,7 +13,7 @@ import java.util.HashMap;
  * This player is for task C.
  * <p>
  * You may implement/extend other interfaces or classes, but ensure ultimately
- * that this class implements the Player interface (directly or indirectly).
+ * that this class implements the def.Player interface (directly or indirectly).
  */
 public class BinaryGuessPlayer implements Player {
 
@@ -50,7 +52,7 @@ public class BinaryGuessPlayer implements Player {
         this.currentPlayer = peopleMap.get(chosenName);
 
 
-    } // end of BinaryGuessPlayer()
+    } // end of def.BinaryGuessPlayer()
 
 
     public Guess guess() {
@@ -73,4 +75,4 @@ public class BinaryGuessPlayer implements Player {
         return true;
     } // end of receiveAnswer()
 
-} // end of class BinaryGuessPlayer
+} // end of class def.BinaryGuessPlayer

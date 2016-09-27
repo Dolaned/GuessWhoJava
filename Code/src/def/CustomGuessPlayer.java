@@ -1,3 +1,5 @@
+package def;
+
 import java.io.*;
 
 /**
@@ -5,7 +7,7 @@ import java.io.*;
  * This player is for bonus task.
  *
  * You may implement/extend other interfaces or classes, but ensure ultimately
- * that this class implements the Player interface (directly or indirectly).
+ * that this class implements the def.Player interface (directly or indirectly).
  */
 public class CustomGuessPlayer implements Player
 {
@@ -25,7 +27,7 @@ public class CustomGuessPlayer implements Player
         throws IOException
     {
 
-    } // end of CustomGuessPlayer()
+    } // end of def.CustomGuessPlayer()
 
 
     public Guess guess() {
@@ -50,4 +52,4 @@ public class CustomGuessPlayer implements Player
         return true;
     } // end of receiveAnswer()
 
-} // end of class CustomGuessPlayer
+} // end of class def.CustomGuessPlayer

@@ -1,18 +1,21 @@
+package def;
+
 import java.io.*;
 import java.util.*;
+
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import java.lang.String;
 
 /**
- * Main class for GuessWho framework.
+ * Main class for def.GuessWho framework.
  *
  * @author Jeffrey Chan, 2016
  */
 public class GuessWho
 {
     /** Name of class, used in error messages. */
-	protected static final String progName = "GuessWho";
+	protected static final String progName = "def.GuessWho";
 
     /**
 	 * Print help/usage message.
@@ -153,10 +156,10 @@ public class GuessWho
                 log.add("Round " + round);
                 // player 1 makes a guess
                 Guess currGuess = player1.guess();
-                log.add("Player 1 guessing " + currGuess);
+                log.add("def.Player 1 guessing " + currGuess);
                 // player 2 responds to guess
                 boolean currAnswer = player2.answer(currGuess);
-                log.add("Player 2 answering " + currAnswer);
+                log.add("def.Player 2 answering " + currAnswer);
                 // player 1 receives response and updates own status
                 // If player 1 made a person guess and it was correct, player1Finished should be true;
                 // otherwise be false.
@@ -164,10 +167,10 @@ public class GuessWho
 
                 // player 2's turn
                 currGuess = player2.guess();
-                log.add("Player 2 guessing " + currGuess);
+                log.add("def.Player 2 guessing " + currGuess);
                 // player 1 responds to guess
                 currAnswer = player1.answer(currGuess);
-                log.add("Player 1 answering " + currAnswer);
+                log.add("def.Player 1 answering " + currAnswer);
                 // player 2 receives response and updates own status
                 // If player 2 made a person guess and it was correct, player2Finished should be true;
                 // otherwise be false
@@ -181,10 +184,10 @@ public class GuessWho
                 log.add("It's a tie!");
             }
             else if (player1Finished) {
-                log.add("Player 1 won!");
+                log.add("def.Player 1 won!");
             }
             else {
-                log.add("Player 2 won!");
+                log.add("def.Player 2 won!");
             }
 		}
 		catch(FileNotFoundException ex) {
@@ -198,7 +201,7 @@ public class GuessWho
 
     } // end of main()
 
-} // end of class GuessWho
+} // end of class def.GuessWho
 
 
 /**
@@ -222,7 +225,7 @@ class MoveLog
         // automatically flush
         mWriter = new PrintWriter(new FileWriter(outFilename), true);
         mFileoutput = true;
-    } // end of MoveLog()
+    } // end of def.MoveLog()
 
 
     /**
@@ -232,7 +235,7 @@ class MoveLog
         // no writer
         mWriter = null;
         mFileoutput = false;
-    } // end of MoveLog()
+    } // end of def.MoveLog()
 
 
     /**
@@ -251,4 +254,4 @@ class MoveLog
         System.out.println(line);
     } // end of add()
 
-} // end of inner class MoveLog
+} // end of inner class def.MoveLog

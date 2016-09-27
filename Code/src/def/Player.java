@@ -1,16 +1,18 @@
-import java.io.*;
+package def;
+
+import def.Guess;
 
 
 /**
- * Interface of a player in Guess Who game.
+ * Interface of a player in def.Guess Who game.
  * Your player implementations must directly or indirectly implement this interface.
  */
 public interface Player
 {
 	/**
 	 * Ask player for a guess.  The guess can be either about attribute-value pair,
-	 * or asking if opponent's chosen person is a certain person.  See Guess.java
-	 * for details about how to create an appropriate Guess object.
+	 * or asking if opponent's chosen person is a certain person.  See def.Guess.java
+	 * for details about how to create an appropriate def.Guess object.
 	 *
 	 * @return This player's guess.
 	 */
@@ -39,4 +41,4 @@ public interface Player
 	 */
 	abstract public boolean receiveAnswer(Guess currGuess, boolean answer);
 
-} // end of interface Player
+} // end of interface def.Player

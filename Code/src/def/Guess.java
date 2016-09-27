@@ -1,3 +1,4 @@
+package def;
 
 /**
  * Class implementing a player's guess.
@@ -10,14 +11,14 @@ public class Guess
 	 * Enum of the two types of guess in game.
 	 * Attribute ("does your chosen person have attribute eyeColour with value blue?")
 	 * classes.Person ("Is your chosen person Ms X?")
-	 * When constructing a Guess object, set this to the appropriate type of guess.
+	 * When constructing a def.Guess object, set this to the appropriate type of guess.
 	 */
 	public static enum GuessType {
 		Attribute,
 		Person
 	};
 
-	/** Guess type. */
+	/** def.Guess type. */
 	protected GuessType mType;
 	/** Attribute (only valid when mType = Attribute) */
 	protected String mAttribute;
@@ -33,10 +34,10 @@ public class Guess
 	 *
 	 * If asking if the opponent's chosen person has an attribute-value pair (attr,val for example),
 	 * then constructor should be called as follows:
-	 *    Guess(Guess.GuessType.Attribute, attr, val)
+	 *    def.Guess(def.Guess.GuessType.Attribute, attr, val)
 	 * If asking if the opponent's chosen person is a particular person (X for example),
 	 * then constructor should be called as follows:
-	 *    Guess(Guess.GuessType.classes.Person, "", X)
+	 *    def.Guess(def.Guess.GuessType.classes.Person, "", X)
 	 *
 	 * @param type Type of guess.
 	 * @param attribute Attribute of guess.
@@ -46,7 +47,7 @@ public class Guess
 		mType = type;
 		mAttribute = attribute;
 		mValue = value;
-	} // end of Guess()
+	} // end of def.Guess()
 
 
 	/**
@@ -74,11 +75,11 @@ public class Guess
 
 
 	/**
-	 * Converts Guess object to String.
+	 * Converts def.Guess object to String.
 	 *
-	 * @return String representation of Guess object.
+	 * @return String representation of def.Guess object.
 	 */
 	public String toString() {
 		return mType + " " + mAttribute + " " + mValue;
 	} // end of toString()
-} // end of class Guess
+} // end of class def.Guess
