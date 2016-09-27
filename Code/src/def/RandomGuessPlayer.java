@@ -5,10 +5,7 @@ import classes.FileHandler;
 import classes.Person;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Random guessing player.
@@ -122,6 +119,16 @@ public class RandomGuessPlayer implements Player {
                 for (String s : marked) {
                     //System.out.println("Removing : " + s);
                     this.peopleMap.remove(s);
+                }
+
+                Iterator<AttributePair> iter = this.attributePairs.iterator();
+
+                while (iter.hasNext()) {
+                    AttributePair pair = iter.next();
+
+                    if (pair.getAttribute().equals(currGuess.getAttribute()))
+                        iter.remove();
+
                 }
             }
         }

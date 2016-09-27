@@ -1,46 +1,96 @@
 Round 1
-def.Player 1 guessing Attribute glasses yellow
-def.Player 2 answering false
-def.Player 2 guessing Attribute hairLength white
-def.Player 1 answering true
-Round 2
-def.Player 1 guessing Attribute hairColor white
-def.Player 2 answering false
-def.Player 2 guessing Attribute hairLength blue
-def.Player 1 answering false
-Round 3
-def.Player 1 guessing Attribute facialHair blue
-def.Player 2 answering false
-def.Player 2 guessing Attribute faceShape white
-def.Player 1 answering true
-Round 4
-def.Player 1 guessing Attribute eyeColor blue
-def.Player 2 answering true
-def.Player 2 guessing Attribute faceShape black
-def.Player 1 answering false
-Round 5
 def.Player 1 guessing Attribute hairColor brown
 def.Player 2 answering true
-def.Player 2 guessing Attribute hairColor red
-def.Player 1 answering true
-Round 6
-def.Player 1 guessing Attribute hat blue
-def.Player 2 answering false
-def.Player 2 guessing Attribute pimples brown
+def.Player 2 guessing Attribute pimples green
 def.Player 1 answering false
-Round 7
-def.Player 1 guessing Attribute hairLength brown
+Round 2
+def.Player 1 guessing Attribute pimples yellow
+def.Player 2 answering false
+def.Player 2 guessing Attribute hat white
+def.Player 1 answering false
+Round 3
+def.Player 1 guessing Attribute faceShape blue
+def.Player 2 answering false
+def.Player 2 guessing Attribute hat green
+def.Player 1 answering false
+Round 4
+def.Player 1 guessing Attribute pimples brown
 def.Player 2 answering false
 def.Player 2 guessing Attribute noseShape red
 def.Player 1 answering false
+Round 5
+def.Player 1 guessing Attribute facialHair blue
+def.Player 2 answering false
+def.Player 2 guessing Attribute hat brown
+def.Player 1 answering false
+Round 6
+def.Player 1 guessing Attribute hat blue
+def.Player 2 answering false
+def.Player 2 guessing Attribute noseShape white
+def.Player 1 answering false
+Round 7
+def.Player 1 guessing Attribute hairLength black
+def.Player 2 answering false
+def.Player 2 guessing Attribute hat blue
+def.Player 1 answering false
 Round 8
-def.Player 1 guessing Attribute faceShape red
-def.Player 2 answering true
+def.Player 1 guessing Attribute hairLength white
+def.Player 2 answering false
+def.Player 2 guessing Attribute eyeColor blue
+def.Player 1 answering true
+Round 9
+def.Player 1 guessing Attribute noseShape green
+def.Player 2 answering false
+def.Player 2 guessing Attribute noseShape green
+def.Player 1 answering true
+Round 10
+def.Player 1 guessing Attribute faceShape black
+def.Player 2 answering false
+def.Player 2 guessing Attribute hairLength blue
+def.Player 1 answering false
+Round 11
+def.Player 1 guessing Attribute pimples red
+def.Player 2 answering false
 def.Player 2 guessing Attribute faceShape blue
 def.Player 1 answering false
-Round 9
+Round 12
+def.Player 1 guessing Attribute eyeColor brown
+def.Player 2 answering false
+def.Player 2 guessing Attribute hairLength green
+def.Player 1 answering false
+Round 13
+def.Player 1 guessing Attribute eyeColor green
+def.Player 2 answering false
+def.Player 2 guessing Attribute hairColor white
+def.Player 1 answering false
+Round 14
+def.Player 1 guessing Attribute noseShape white
+def.Player 2 answering true
+def.Player 2 guessing Attribute faceShape white
+def.Player 1 answering true
+Round 15
+def.Player 1 guessing Attribute hat green
+def.Player 2 answering false
+def.Player 2 guessing Attribute hairLength yellow
+def.Player 1 answering false
+Round 16
+def.Player 1 guessing Attribute faceShape brown
+def.Player 2 answering false
+def.Player 2 guessing Attribute hairLength black
+def.Player 1 answering false
+Round 17
+def.Player 1 guessing Attribute eyeColor blue
+def.Player 2 answering true
+def.Player 2 guessing Attribute hairLength white
+def.Player 1 answering true
+Round 18
+def.Player 1 guessing Attribute facialHair white
+def.Player 2 answering true
+def.Player 2 guessing Attribute pimples yellow
+def.Player 1 answering false
+Round 19
 def.Player 1 guessing Person  P5
 def.Player 2 answering true
-def.Player 2 guessing Attribute hat red
-def.Player 1 answering true
+def.Player 2 guessing Attribute hairColor brown
+def.Player 1 answering false
 def.Player 1 won!
