@@ -14,10 +14,10 @@ public class BST {
         rootNode.setYesNode(new BTNode(yesGuess));
         rootNode.setNoNode(new BTNode(noGuess));
     }
-
+    /*
     public void query() {
-        //rootNode.query();
-    }
+        rootNode.query();
+    }*/
 
     class BTNode {
 
@@ -30,8 +30,6 @@ public class BST {
             noNode = null;
             yesNode = null;
         }
-
-
 
 
         public BTNode getYesNode() {
