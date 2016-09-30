@@ -70,23 +70,16 @@ public class RandomGuessPlayer implements Player {
     } // end of guess()
 
     public boolean answer(Guess currGuess) {
+        Boolean retValue =false;
 
         if (currGuess.getType() == Guess.GuessType.Person) {
             if (currGuess.getValue().equals(this.currentPlayer.getPlayerName())) {
-                return true;
+                retValue = true;
             }
         } else {
-            ArrayList<AttributePair> currentAttr = this.currentPlayer.getPairs();
-
-            for (AttributePair pair : currentAttr) {
-                if (pair.getAttribute().equals(currGuess.getAttribute())) {
-                    if (pair.getValue().equals(currGuess.getValue())) {
-                        return true;
-                    }
-                }
-            }
+           retValue = currentPlayer.hasAttriutePair(new AttributePair(currGuess.getAttribute(), currGuess.getValue()));
         }
-        return false;
+        return retValue;
     } // end of answer()
 
 

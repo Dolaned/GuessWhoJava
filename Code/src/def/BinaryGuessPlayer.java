@@ -7,6 +7,7 @@ import classes.Person;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Binary-search based guessing player.
@@ -19,6 +20,7 @@ public class BinaryGuessPlayer implements Player {
 
     //collection of people to guess from
     private HashMap<String, Person> peopleMap = new HashMap<>();
+    private HashMap<AttributePair, Integer> pairCount = new HashMap<>();
 
     //collection of attribute pairs the above might have
     private ArrayList<AttributePair> attributePairs = new ArrayList<>();
@@ -52,7 +54,22 @@ public class BinaryGuessPlayer implements Player {
         this.currentPlayer = peopleMap.get(chosenName);
 
 
-    } // end of def.BinaryGuessPlayer()
+        for (Map.Entry<String, Person> personEntry : peopleMap.entrySet()) {
+
+            for (AttributePair pair : personEntry.getValue().getPairs()) {
+                if (pairCount.get(pair) != null) {
+                    int counter = pairCount.get(pair);
+                    counter++;
+                    pairCount.put(pair, counter);
+
+                } else {
+                    pairCount.put(pair, 1);
+                }
+            }
+        }
+
+
+    } // end of BinaryGuessPlayer()
 
 
     public Guess guess() {
@@ -63,10 +80,16 @@ public class BinaryGuessPlayer implements Player {
 
 
     public boolean answer(Guess currGuess) {
+        Boolean retValue = false;
 
-
-        // placeholder, replace
-        return false;
+        if (currGuess.getType() == Guess.GuessType.Person) {
+            if (currGuess.getValue().equals(this.currentPlayer.getPlayerName())) {
+                retValue = true;
+            }
+        } else {
+            retValue = currentPlayer.hasAttriutePair(new AttributePair(currGuess.getAttribute(), currGuess.getValue()));
+        }
+        return retValue;
     } // end of answer()
 
 
@@ -75,4 +98,4 @@ public class BinaryGuessPlayer implements Player {
         return true;
     } // end of receiveAnswer()
 
-} // end of class def.BinaryGuessPlayer
+} // end of class BinaryGuessPlayer

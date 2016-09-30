@@ -17,6 +17,18 @@ public class Person {
         pairs = new ArrayList<>();
     }
 
+    public Boolean hasAttriutePair(AttributePair pair){
+
+        for (AttributePair pair2 : this.pairs) {
+            if (pair2.getAttribute().equals(pair.getAttribute())) {
+                if (pair2.getValue().equals(pair.getValue())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     public void addattributePair(AttributePair pair){
         this.pairs.add(pair);
