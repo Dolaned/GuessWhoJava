@@ -51,7 +51,6 @@ public class BinaryGuessPlayer implements Player {
         //assign the current player to one of the inputted players.
         this.currentPlayer = peopleMap.get(chosenName);
 
-
         // this is horrible but works.
         for (Map.Entry<String, Person> personEntry : peopleMap.entrySet()) {
             for (AttributePair attributePair : attributePairs) {
@@ -97,11 +96,8 @@ public class BinaryGuessPlayer implements Player {
 
         //perform binary search for most optimal result
         if (peopleMap.size() > 2) {
-            //if (binarySearch(peopleMap.size() / 2) != null) {
             AttributePair nextGuess = this.attributePairs.get(binarySearch(peopleMap.size() / 2));
-            this.attributePairs.remove(binarySearch(peopleMap.size() / 2));
             return new Guess(Guess.GuessType.Attribute, nextGuess.getAttribute(), nextGuess.getValue());
-            //}
 
         } else {//take a guess its 50/50
             return new Guess(Guess.GuessType.Person, "", peopleMap.entrySet().iterator().next().getKey());
@@ -128,6 +124,8 @@ public class BinaryGuessPlayer implements Player {
         if (currGuess.getType() == Guess.GuessType.Person) {
             if (answer) {
                 return true;
+            }else{
+                this.peopleMap.remove(currGuess.getValue());
             }
         } else {
             if (answer) {
@@ -153,7 +151,7 @@ public class BinaryGuessPlayer implements Player {
                 while (iter.hasNext()) {
                     AttributePair pair = iter.next();
 
-                    if (pair.getAttribute().equals(currGuess.getAttribute()))
+                    if (pair.getAttribute().equals(currGuess.getAttribute())  || pair.getOccurence() > this.peopleMap.size()/2)
                         iter.remove();
 
                 }
@@ -180,7 +178,7 @@ public class BinaryGuessPlayer implements Player {
                 while (iter.hasNext()) {
                     AttributePair pair = iter.next();
 
-                    if (pair.getAttribute().equals(currGuess.getAttribute()))
+                    if (pair.getAttribute().equals(currGuess.getAttribute()) || pair.getOccurence() > this.peopleMap.size()/2)
                         iter.remove();
 
                 }
