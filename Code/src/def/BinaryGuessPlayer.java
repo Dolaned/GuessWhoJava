@@ -43,7 +43,6 @@ public class BinaryGuessPlayer implements Player {
             fileHandler.parseFile(gameFilename);
             this.peopleMap = fileHandler.getPeopleMap();
             this.attributePairs = fileHandler.getAttributePairs();
-            this.pairCount = new Integer[this.attributePairs.size()];
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,36 +63,43 @@ public class BinaryGuessPlayer implements Player {
                 }
             }
         }
-        // Sorting the arraylist.
         Collections.sort(attributePairs, new Comparator<AttributePair>() {
             @Override
             public int compare(AttributePair o1, AttributePair o2) {
                 return o1.getOccurence().compareTo(o2.getOccurence());
             }
         });
+        setupArray();
 
-        for (int i = 0; i < this.attributePairs.size(); i++) {
-            this.pairCount[i] = this.attributePairs.get(i).getOccurence();
-        }
 
-/*
-        for (AttributePair attributePair : attributePairs) {
+        /*for (AttributePair attributePair : attributePairs) {
 
             System.out.println("Attribute : " + attributePair.getAttribute());
             System.out.println("Value:  " + attributePair.getValue());
             System.out.println("Occurence  : " + attributePair.getOccurence());
-        }
-*/
+        }*/
+
 
     } // end of BinaryGuessPlayer()
 
 
+    public void setupArray(){
+
+        this.pairCount = new Integer[this.attributePairs.size()];
+        // Sorting the arraylist.
+
+        for (int i = 0; i < this.attributePairs.size(); i++) {
+            this.pairCount[i] = this.attributePairs.get(i).getOccurence();
+        }
+    }
     public Guess guess() {
+        setupArray();
 
         //perform binary search for most optimal result
         if (peopleMap.size() > 2) {
             //if (binarySearch(peopleMap.size() / 2) != null) {
             AttributePair nextGuess = this.attributePairs.get(binarySearch(peopleMap.size() / 2));
+            this.attributePairs.remove(binarySearch(peopleMap.size() / 2));
             return new Guess(Guess.GuessType.Attribute, nextGuess.getAttribute(), nextGuess.getValue());
             //}
 
@@ -131,13 +137,8 @@ public class BinaryGuessPlayer implements Player {
 
                     Person p = entry.getValue();
                     Boolean hasAttribute = false;
-                    for (AttributePair pair : p.getPairs()) {
-
-                        if (pair.getAttribute().equals(currGuess.getAttribute())) {
-                            if (pair.getValue().equals(currGuess.getValue())) {
-                                hasAttribute = true;
-                            }
-                        }
+                    if(p.hasAttributePair(new AttributePair(currGuess.getAttribute(),currGuess.getValue()))){
+                        hasAttribute = true;
                     }
                     if (!hasAttribute) {
                         marked.add(entry.getKey());
@@ -147,7 +148,33 @@ public class BinaryGuessPlayer implements Player {
                     //System.out.println("Removing : " + s);
                     this.peopleMap.remove(s);
                 }
+                Iterator<AttributePair> iter = this.attributePairs.iterator();
 
+                while (iter.hasNext()) {
+                    AttributePair pair = iter.next();
+
+                    if (pair.getAttribute().equals(currGuess.getAttribute()))
+                        iter.remove();
+
+                }
+            }else{// do the opposite of above
+                ArrayList<String> marked = new ArrayList<>();
+
+                for (Map.Entry<String, Person> entry : this.peopleMap.entrySet()) {
+
+                    Person p = entry.getValue();
+                    Boolean hasAttribute = true;
+                    if(!p.hasAttributePair(new AttributePair(currGuess.getAttribute(),currGuess.getValue()))){
+                        hasAttribute = false;
+                    }
+                    if (hasAttribute) {
+                        marked.add(entry.getKey());
+                    }
+                }
+                for (String s : marked) {
+                    //System.out.println("Removing : " + s);
+                    this.peopleMap.remove(s);
+                }
                 Iterator<AttributePair> iter = this.attributePairs.iterator();
 
                 while (iter.hasNext()) {
@@ -180,7 +207,7 @@ public class BinaryGuessPlayer implements Player {
         while (high >= low) {
 
             int middle = (low + high) / 2;
-            System.out.println(low + "<low |<mid>"+middle+" <key> " +key+"|  high>" + high);
+            //System.out.println(low + "<low |<mid>"+middle+" <key> " +key+"|  high>" + high);
             if (this.pairCount[middle] == key) {
                 return middle;
             }
