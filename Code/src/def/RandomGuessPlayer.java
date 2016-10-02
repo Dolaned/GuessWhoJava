@@ -77,7 +77,7 @@ public class RandomGuessPlayer implements Player {
                 retValue = true;
             }
         } else {
-           retValue = currentPlayer.hasAttriutePair(new AttributePair(currGuess.getAttribute(), currGuess.getValue()));
+           retValue = currentPlayer.hasAttributePair(new AttributePair(currGuess.getAttribute(), currGuess.getValue()));
         }
         return retValue;
     } // end of answer()

@@ -17,7 +17,7 @@ public class Person {
         pairs = new ArrayList<>();
     }
 
-    public Boolean hasAttriutePair(AttributePair pair){
+    public Boolean hasAttributePair(AttributePair pair){
 
         for (AttributePair pair2 : this.pairs) {
             if (pair2.getAttribute().equals(pair.getAttribute())) {
