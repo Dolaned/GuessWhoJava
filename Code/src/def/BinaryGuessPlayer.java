@@ -95,7 +95,7 @@ public class BinaryGuessPlayer implements Player {
         setupArray();
 
         //perform binary search for most optimal result
-        if (peopleMap.size() > 2) {
+        if (peopleMap.size() > 3) {
             AttributePair nextGuess = this.attributePairs.get(binarySearch(peopleMap.size() / 2));
             return new Guess(Guess.GuessType.Attribute, nextGuess.getAttribute(), nextGuess.getValue());
 
@@ -212,7 +212,7 @@ public class BinaryGuessPlayer implements Player {
             if (this.pairCount[middle] < key) {
                 low = middle + 1;
             }
-            if (this.pairCount[middle] > key) {
+            if (this.pairCount[middle] > key ) {
                 high = middle - 1;
             }
         }
