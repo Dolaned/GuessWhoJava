@@ -51,7 +51,8 @@ public class BinaryGuessPlayer implements Player {
         //assign the current player to one of the inputted players.
         this.currentPlayer = peopleMap.get(chosenName);
 
-        // this is horrible but works.
+        /*
+        // this is horrible but works. yes it is.
         for (Map.Entry<String, Person> personEntry : peopleMap.entrySet()) {
             for (AttributePair attributePair : attributePairs) {
                 for (AttributePair p : personEntry.getValue().getPairs()) {
@@ -69,6 +70,7 @@ public class BinaryGuessPlayer implements Player {
             }
         });
         setupArray();
+        */
 
 
         /*for (AttributePair attributePair : attributePairs) {
@@ -91,7 +93,46 @@ public class BinaryGuessPlayer implements Player {
             this.pairCount[i] = this.attributePairs.get(i).getOccurence();
         }
     }
+
+
     public Guess guess() {
+        
+        HashMap<AttributePair, int> tempAP = new HashMap<>();
+        
+        for (Map.Entry<String, Person> personEntry : peopleMap.entrySet()) {
+            for (AttributePair p : personEntry.getValue().getPairs()) {
+                tempAP.add(p, +1);
+            }
+        }
+
+        int idealGuess = peopleMap.size()/2;
+        AttributePair bestGuess = null;
+        if(peopleMap.size() > 1){
+            for(Map.Entry<AttributePair, int> ap: tempAP.entrySet()){
+                if(ap.getValue == idealGuess){
+                    return new Guess(Guess.GuessType.Attibute, ap.getKey().getAttribute(), ap.getKey().getValue());
+                }
+                else{
+                    if(bestGuess== null){
+                        bestGuess = ap.getKey();
+                    }
+                    else{
+                        
+                        if(Math.abs(idealGuess - tempAP.getValue(bestGuess) > Math.abs(idealGuess - ap.getValue()))){
+                            bestGuess = ap.getKey();
+                        }
+                    }
+                 }
+             }
+             return new Guess(Guess.GuessType.Attribute, bestGuess.getAttribute(), bestGuess.getValue());
+         }
+         else{
+             return new Guess(Guess.GuessType.Person, "", peopleMap.entrySet().iterator().next().getKey());
+         }
+
+
+        
+        /*
         setupArray();
 
         //perform binary search for most optimal result
@@ -101,7 +142,7 @@ public class BinaryGuessPlayer implements Player {
 
         } else {//take a guess its 50/50
             return new Guess(Guess.GuessType.Person, "", peopleMap.entrySet().iterator().next().getKey());
-        }
+        }*/
     } // end of guess()
 
 
@@ -121,6 +162,36 @@ public class BinaryGuessPlayer implements Player {
 
     public boolean receiveAnswer(Guess currGuess, boolean answer) {
 
+        if(currGuess.getType() == Guess.GuessType.Person){
+            if (answer){
+                return true;
+            }
+            else{
+                this.peopleMap.remove(currGuess.getValue());
+            }
+        }
+        else{
+            for(Map.Entry<String, Person> tempPerson : this.peopleMap.entrySet()){
+                if(tempPerson.getValue.hasAttributeValue(new AttributePair(currGuess.getAttribute(), currGuess.getValue()))){
+                    if(!answer){
+                        this.peopleMap.remove(tempPerson.getKey());
+                    }
+                }    
+                else{
+                    if(answer){
+                        this.peopleMap.remove(tempPerson.getKey());
+                    }
+                }
+            }
+        }
+
+        return false;
+   
+
+
+
+
+/*
         if (currGuess.getType() == Guess.GuessType.Person) {
             if (answer) {
                 return true;
@@ -185,7 +256,7 @@ public class BinaryGuessPlayer implements Player {
             }
         }
         // placeholder, replace
-        return false;
+        return false;*/
     } // end of receiveAnswer()
 
 
