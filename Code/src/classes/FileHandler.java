@@ -4,23 +4,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.*;
 
 /**
  * Created by dylanaird on 25/09/2016.
  */
 public class FileHandler {
-    private HashMap<String, Person> peopleMap = new HashMap<>();
+    private ConcurrentHashMap<String, Person> peopleMap = new ConcurrentHashMap<>();
 
     //collection of attribute pairs the above might have
     private ArrayList<AttributePair> attributePairs = new ArrayList<>();
 
     public FileHandler(){}
 
-    public HashMap<String, Person> getPeopleMap() {
+    public ConcurrentHashMap<String, Person> getPeopleMap() {
         return peopleMap;
     }
 
-    public void setPeopleMap(HashMap<String, Person> peopleMap) {
+    public void setPeopleMap(ConcurrentHashMap<String, Person> peopleMap) {
         this.peopleMap = peopleMap;
     }
 
