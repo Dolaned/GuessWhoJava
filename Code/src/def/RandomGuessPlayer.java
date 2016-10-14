@@ -6,6 +6,8 @@ import classes.Person;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * Random guessing player.
@@ -16,7 +18,7 @@ import java.util.*;
  */
 public class RandomGuessPlayer implements Player {
     //collection of people to guess from
-    private HashMap<String, Person> peopleMap = new HashMap<>();
+    private ConcurrentHashMap<String, Person> peopleMap = new ConcurrentHashMap<>();
 
     //collection of attribute pairs the above might have
     private ArrayList<AttributePair> attributePairs = new ArrayList<>();

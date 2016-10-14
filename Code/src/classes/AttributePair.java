@@ -9,7 +9,16 @@ public class AttributePair {
 
     private String attribute;
     private String value;
-    private Integer occurence =0;
+    private Double occurence =0.0;
+    private int chance = 0;
+
+    public int getChance() {
+        return chance;
+    }
+
+    public void setChance(int chance) {
+        this.chance = chance;
+    }
 
     public UUID getId() {
         return id;
@@ -21,11 +30,11 @@ public class AttributePair {
 
     private UUID id;
 
-    public Integer getOccurence() {
+    public Double getOccurence() {
         return occurence;
     }
 
-    public void setOccurence(Integer occurence) {
+    public void setOccurence(Double occurence) {
         this.occurence = occurence;
     }
 

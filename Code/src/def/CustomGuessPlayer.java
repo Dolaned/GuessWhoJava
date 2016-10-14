@@ -6,6 +6,7 @@ import classes.Person;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Your customised guessing player.
@@ -18,7 +19,7 @@ import java.util.*;
 public class CustomGuessPlayer implements Player
 {
     //collection of people to guess from
-    private HashMap<String, Person> peopleMap = new HashMap<>();
+    private ConcurrentHashMap<String, Person> peopleMap = new ConcurrentHashMap<>();
     private Integer[] pairCount;
 
     //collection of attribute pairs the above might have
@@ -62,10 +63,12 @@ public class CustomGuessPlayer implements Player
 
     public Guess guess() {
 
+        this.calcAndSortOccurences();
         //perform binary search for most optimal result
-        if (peopleMap.size() > 3 ) {
+        if (peopleMap.size() > 3) {
             int guess = peopleMap.size() / 2;
-            AttributePair nextGuess = this.attributePairs.get(binarySearch(guess));
+            System.out.println(guess);
+            AttributePair nextGuess = this.attributePairs.get(binarySearch(50));
             return new Guess(Guess.GuessType.Attribute, nextGuess.getAttribute(), nextGuess.getValue());
 
         } else {//take a guess its 50/50
@@ -120,6 +123,9 @@ public class CustomGuessPlayer implements Player
         while (high >= low) {
 
             int middle = (low + high) / 2;
+            if(middle >= attributePairs.size()){
+                return attributePairs.size()-1;
+            }
             //System.out.println(low + "<low |<mid>"+middle+" <key> " +key+"|  high>" + high);
             if (this.attributePairs.get(middle).getOccurence() == key) {
                 return middle;
@@ -131,7 +137,8 @@ public class CustomGuessPlayer implements Player
                 high = middle - 1;
             }
         }
-        return -1;
+
+        return low;
     }
 
     private void removeQuestions(Guess guess, Boolean answer) {
@@ -168,8 +175,8 @@ public class CustomGuessPlayer implements Player
             for (AttributePair attributePair : attributePairs) {
                 for (AttributePair p : personEntry.getValue().getPairs()) {
                     if (pairsMatch(p, attributePair)) {
-                        int occ = attributePair.getOccurence();
-                        attributePair.setOccurence(occ + 1);
+                        double occ = attributePair.getOccurence();
+                        attributePair.setOccurence(occ + 1.0);
                     }
                 }
             }
@@ -186,8 +193,11 @@ public class CustomGuessPlayer implements Player
         while (iter.hasNext()) {
             AttributePair pair = iter.next();
 
-            if(pair.getOccurence() == 0)
+            if(pair.getOccurence() == 0) {
                 iter.remove();
+            }else{
+                pair.setOccurence(pair.getOccurence() / peopleMap.size() * 100);
+            }
         }
     }
 
