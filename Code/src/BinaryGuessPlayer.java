@@ -1,9 +1,3 @@
-package def;
-
-import classes.AttributePair;
-import classes.FileHandler;
-import classes.Person;
-
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * This player is for task C.
  * <p>
  * You may implement/extend other interfaces or classes, but ensure ultimately
- * that this class implements the def.Player interface (directly or indirectly).
+ * that this class implements the Player interface (directly or indirectly).
  */
 public class BinaryGuessPlayer implements Player {
 

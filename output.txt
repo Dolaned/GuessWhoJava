@@ -1,26 +1,81 @@
 Round 1
-Player 1 guessing Attribute Pet 2
-Player 2 answering true
-Player 2 guessing Attribute Hat 3
+Player 1 guessing Attribute hairLength medium
+Player 2 answering false
+Player 2 guessing Attribute hairLength long
 Player 1 answering false
 Round 2
-Player 1 guessing Attribute HP 2
-Player 2 answering true
-Player 2 guessing Attribute Hat 2
+Player 1 guessing Attribute hairLength long
+Player 2 answering false
+Player 2 guessing Attribute eyeColor hazel
 Player 1 answering true
 Round 3
-Player 1 guessing Attribute Weapon 3
-Player 2 answering true
-Player 2 guessing Attribute Armor 10
-Player 1 answering false
+Player 1 guessing Attribute pimples little
+Player 2 answering false
+Player 2 guessing Attribute faceShape oval
+Player 1 answering true
 Round 4
-Player 1 guessing Attribute Hat 3
-Player 2 answering false
-Player 2 guessing Attribute Homeworld 3
-Player 1 answering true
+Player 1 guessing Attribute pimples none
+Player 2 answering true
+Player 2 guessing Attribute hat none
+Player 1 answering false
 Round 5
-Player 1 guessing Attribute Hat 2
+Player 1 guessing Attribute hobbies programming
 Player 2 answering false
-Player 2 guessing Person  P13
+Player 2 guessing Attribute facialHair ginger
+Player 1 answering false
+Round 6
+Player 1 guessing Attribute hobbies writingPythonScriptsForAssignments
+Player 2 answering false
+Player 2 guessing Attribute hairColor red
+Player 1 answering false
+Round 7
+Player 1 guessing Attribute hobbies gettingSmashedOnFridayNight
+Player 2 answering false
+Player 2 guessing Attribute hat blue
 Player 1 answering true
-Player 2 won!
+Round 8
+Player 1 guessing Attribute eyeColor green
+Player 2 answering false
+Player 2 guessing Attribute glasses none
+Player 1 answering false
+Round 9
+Player 1 guessing Attribute eyeColor hazel
+Player 2 answering false
+Player 2 guessing Attribute hobbies writingPythonScriptsForAssignments
+Player 1 answering false
+Round 10
+Player 1 guessing Attribute eyeColor brown
+Player 2 answering false
+Player 2 guessing Attribute facialHair blonde
+Player 1 answering false
+Round 11
+Player 1 guessing Attribute hairColor dyed
+Player 2 answering true
+Player 2 guessing Attribute facialHair dyed
+Player 1 answering false
+Round 12
+Player 1 guessing Attribute hat none
+Player 2 answering false
+Player 2 guessing Attribute pimples lots
+Player 1 answering false
+Round 13
+Player 1 guessing Attribute facialHair blonde
+Player 2 answering false
+Player 2 guessing Attribute glasses blue
+Player 1 answering true
+Round 14
+Player 1 guessing Attribute noseShape hooked
+Player 2 answering true
+Player 2 guessing Attribute hobbies gettingSmashedOnFridayNight
+Player 1 answering false
+Round 15
+Player 1 guessing Attribute facialHair black
+Player 2 answering false
+Player 2 guessing Attribute noseShape broken
+Player 1 answering false
+Round 16
+Player 1 guessing Person  P2911
+Player 2 answering true
+Player 2 guessing Attribute noseShape rounded
+Player 1 answering true
+Player 1 won!

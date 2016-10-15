@@ -1,5 +1,3 @@
-package def;
-
 import java.io.*;
 import java.util.*;
 
@@ -8,14 +6,14 @@ import joptsimple.OptionSet;
 import java.lang.String;
 
 /**
- * Main class for def.GuessWho framework.
+ * Main class for GuessWho framework.
  *
  * @author Jeffrey Chan, 2016
  */
 public class GuessWho
 {
     /** Name of class, used in error messages. */
-	protected static final String progName = "def.GuessWho";
+	protected static final String progName = "GuessWho";
 
     /**
 	 * Print help/usage message.
@@ -201,7 +199,7 @@ public class GuessWho
 
     } // end of main()
 
-} // end of class def.GuessWho
+} // end of class GuessWho
 
 
 /**
@@ -225,7 +223,7 @@ class MoveLog
         // automatically flush
         mWriter = new PrintWriter(new FileWriter(outFilename), true);
         mFileoutput = true;
-    } // end of def.MoveLog()
+    } // end of MoveLog()
 
 
     /**
@@ -235,7 +233,7 @@ class MoveLog
         // no writer
         mWriter = null;
         mFileoutput = false;
-    } // end of def.MoveLog()
+    } // end of MoveLog()
 
 
     /**
@@ -254,4 +252,4 @@ class MoveLog
         System.out.println(line);
     } // end of add()
 
-} // end of inner class def.MoveLog
+} // end of inner class MoveLog

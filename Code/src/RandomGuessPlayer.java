@@ -1,20 +1,13 @@
-package def;
-
-import classes.AttributePair;
-import classes.FileHandler;
-import classes.Person;
-
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * Random guessing player.
  * This player is for task B.
  * <p>
  * You may implement/extend other interfaces or classes, but ensure ultimately
- * that this class implements the def.Player interface (directly or indirectly).
+ * that this class implements the Player interface (directly or indirectly).
  */
 public class RandomGuessPlayer implements Player {
     //collection of people to guess from
@@ -52,7 +45,7 @@ public class RandomGuessPlayer implements Player {
 
         //assign the current player to one of the inputted players.
         this.currentPlayer = peopleMap.get(chosenName);
-    } // end of def.RandomGuessPlayer()
+    } // end of RandomGuessPlayer()
 
     public Guess guess() {
 
@@ -131,4 +124,4 @@ public class RandomGuessPlayer implements Player {
         return false;
     } // end of receiveAnswer()
 
-} // end of class def.RandomGuessPlayer
+} // end of class RandomGuessPlayer
