@@ -19,13 +19,11 @@ public class BinaryGuessPlayer implements Player {
 
     //collection of people to guess from
     private ConcurrentHashMap<String, Person> peopleMap = new ConcurrentHashMap<>();
-    private Integer[] pairCount;
 
     //collection of attribute pairs the above might have
     private ArrayList<AttributePair> attributePairs = new ArrayList<>();
     //current lpayer selected
     private Person currentPlayer;
-    private ArrayList<AttributePair> guessed = new ArrayList<>();
 
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
@@ -51,24 +49,23 @@ public class BinaryGuessPlayer implements Player {
         }
 
         //assign the current player to one of the inputted players.
-
         this.currentPlayer = peopleMap.get(chosenName);
 
         //calculate and sort the attribute occurences per player.
         this.calcAndSortOccurences();
-
-
     } // end of BinaryGuessPlayer()
 
     public Guess guess() {
+        //calculate the
         this.calcAndSortProb();
         //perform binary search for most optimal result
-        if (peopleMap.size() > 1 && this.attributePairs.size() != 0) {
+        if (peopleMap.size() > 1) {
+            //static guess to make sur the guess is in the closest region of half the people map size
             int guess = 50;
 
+            //use get closest value to return the closet value to 50% of the array.
             AttributePair nextGuess = this.attributePairs.get(getClosestValue(guess));
             this.attributePairs.remove(getClosestValue(guess));
-            guessed.add(nextGuess);
             return new Guess(Guess.GuessType.Attribute, nextGuess.getAttribute(), nextGuess.getValue());
 
         } else {//take a guess its 50/50
@@ -80,6 +77,7 @@ public class BinaryGuessPlayer implements Player {
     public boolean answer(Guess currGuess) {
         Boolean retValue = false;
 
+        //check if person guess was true or the attribute guess is true and return
         if (currGuess.getType() == Guess.GuessType.Person) {
             if (currGuess.getValue().equals(this.currentPlayer.getPlayerName())) {
                 retValue = true;
@@ -91,6 +89,7 @@ public class BinaryGuessPlayer implements Player {
     } // end of answer()
 
 
+    //pretty straight forward receives answer and calls removeQuestions from down below.
     public boolean receiveAnswer(Guess currGuess, boolean answer) {
 
         if (currGuess.getType() == Guess.GuessType.Person) {
@@ -102,11 +101,11 @@ public class BinaryGuessPlayer implements Player {
         } else {
             removeQuestions(currGuess, answer);
         }
-        // placeholder, replace
         return false;
     } // end of receiveAnswer()
 
 
+    //this function just checks if two attribute pairs match.
     private boolean pairsMatch(AttributePair pair1, AttributePair pair2) {
         if (pair1.getAttribute().equals(pair2.getAttribute())) {
             if (pair1.getValue().equals(pair2.getValue())) {
@@ -116,6 +115,11 @@ public class BinaryGuessPlayer implements Player {
         return false;
     }
 
+    //This is the heart of the program, this function searches for the value of 50
+    //this value represents removing halve of the remaining people.
+    //it does this by comparing the .getchance() function of the attribute pair.
+    //if it cannot find 50 it returns the value of the upper and lower bounds, which
+    //are the closest values to 50.
     private int[] binarySearch(int key) {
         int low = 0;
         int high = this.attributePairs.size() - 1;
@@ -133,7 +137,6 @@ public class BinaryGuessPlayer implements Player {
                 return lowHigh;
             }
         }
-
         lowHigh[0] = this.attributePairs.indexOf(this.attributePairs.get(high));
         lowHigh[1] = this.attributePairs.indexOf(this.attributePairs.get(low));
         return lowHigh;
@@ -173,7 +176,7 @@ public class BinaryGuessPlayer implements Player {
         }
     }
 
-
+    //this function removes the questions given whether the response from the opposing player was true or false;
     private void removeQuestions(Guess guess, Boolean answer) {
 
         for (Map.Entry<String, Person> entry : this.peopleMap.entrySet()) {
@@ -189,42 +192,64 @@ public class BinaryGuessPlayer implements Player {
                 }
             }
         }
+
+        //this removes all types of the attribute questions if a true is received. ie hat 2 = true, remove all hats.
+        if (answer) {
+            Iterator<AttributePair> iter = this.attributePairs.iterator();
+            while (iter.hasNext()) {
+                AttributePair pair = iter.next();
+                if (Objects.equals(pair.getAttribute(), guess.getAttribute())) {
+                    iter.remove();
+                }
+            }
+        }
     }
 
+    //this function calculates how many times each attribute pair happens in the inputted people map data set.
+    //once it has done this it turns them to a % of 100, this is what helps the binary search about do the split
+    // as it splits on % close to 50.
     private void calcAndSortOccurences() {
         // this is horrible but works.
         for (Map.Entry<String, Person> personEntry : peopleMap.entrySet()) {
             for (AttributePair attributePair : this.attributePairs) {
                 for (AttributePair p : personEntry.getValue().getPairs()) {
                     if (pairsMatch(p, attributePair)) {
-                        double occ = attributePair.getOccurence();
+                        int occ = attributePair.getOccurence();
                         attributePair.setOccurence(occ + 1);
                     }
                 }
             }
         }
-    }
 
+        //iterates over the attribute pairs and removes values of 0 or 100 as these will produce in accurate searching.
+        Iterator<AttributePair> iter = this.attributePairs.iterator();
+        while (iter.hasNext()) {
+            AttributePair pair = iter.next();
+            double p = pair.getOccurence();
+            double c = p / peopleMap.size() * 100;
+            pair.setChance((int)c);
+            if (pair.getChance() == 100 || pair.getChance() == 0) {
+                iter.remove();
+            }
+        }
 
-    private void calcAndSortProb() {
+        //finally sort the array, this step is needed to perform a proper binary search, as they only work effectively
+        //on sorted arrays.
         Collections.sort(this.attributePairs, new Comparator<AttributePair>() {
             @Override
             public int compare(AttributePair o1, AttributePair o2) {
                 return o1.getOccurence().compareTo(o2.getOccurence());
             }
         });
-
-        Iterator<AttributePair> iter = this.attributePairs.iterator();
-        while (iter.hasNext()) {
-            AttributePair pair = iter.next();
-
-            if (pair.getOccurence() == 0 || pair.getOccurence() > peopleMap.size() || pair.getChance() == 100) {
-                iter.remove();
-            } else {
-                pair.setChance((int) (Math.abs(pair.getOccurence() / peopleMap.size()) * 100));
-                //System.out.println(pair.getAttribute() + pair.getValue() + " " + pair.getChance());
-            }
+    }
+    //this function is called after every round to recalculate the occurences in the remaining pairs, not eliminated from
+    //previous rounds.
+    private void calcAndSortProb() {
+        for (AttributePair pair : this.attributePairs) {
+            pair.setOccurence(0);
+            pair.setChance(0);
         }
+        this.calcAndSortOccurences();
     }
 
 } // end of class BinaryGuessPlayer

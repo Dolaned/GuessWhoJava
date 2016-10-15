@@ -7,9 +7,13 @@ import java.util.UUID;
  */
 public class AttributePair {
 
+    //current attribute
     private String attribute;
+    //its value
     private String value;
-    private Double occurence =0.0;
+    //how many times it occurs in the players
+    private int occurence = 0;
+    //the chance it will half the player map
     private int chance = 0;
 
     public int getChance() {
@@ -30,14 +34,13 @@ public class AttributePair {
 
     private UUID id;
 
-    public Double getOccurence() {
+    public Integer getOccurence() {
         return occurence;
     }
 
-    public void setOccurence(Double occurence) {
+    public void setOccurence(Integer occurence) {
         this.occurence = occurence;
     }
-
 
 
     public String getAttribute() {
@@ -56,7 +59,7 @@ public class AttributePair {
         this.value = value;
     }
 
-    public AttributePair(String attribute, String value){
+    public AttributePair(String attribute, String value) {
         this.attribute = attribute;
         this.value = value;
         this.id = UUID.randomUUID();

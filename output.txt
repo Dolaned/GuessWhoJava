@@ -1,31 +1,26 @@
 Round 1
 Player 1 guessing Attribute Pet 2
 Player 2 answering true
-Player 2 guessing Attribute Pen 1
-Player 1 answering false
-Round 2
-Player 1 guessing Attribute Hat 3
-Player 2 answering true
-Player 2 guessing Attribute Armor 1
-Player 1 answering false
-Round 3
-Player 1 guessing Attribute Hat 5
-Player 2 answering false
-Player 2 guessing Attribute Armor 4
-Player 1 answering false
-Round 4
-Player 1 guessing Attribute Homeworld 2
-Player 2 answering false
 Player 2 guessing Attribute Hat 3
 Player 1 answering false
+Round 2
+Player 1 guessing Attribute HP 2
+Player 2 answering true
+Player 2 guessing Attribute Hat 2
+Player 1 answering true
+Round 3
+Player 1 guessing Attribute Weapon 3
+Player 2 answering true
+Player 2 guessing Attribute Armor 10
+Player 1 answering false
+Round 4
+Player 1 guessing Attribute Hat 3
+Player 2 answering false
+Player 2 guessing Attribute Homeworld 3
+Player 1 answering true
 Round 5
-Player 1 guessing Attribute Armor 2
-Player 2 answering true
-Player 2 guessing Attribute MP 2
-Player 1 answering false
-Round 6
-Player 1 guessing Person  P18
-Player 2 answering true
-Player 2 guessing Attribute MP 1
-Player 1 answering false
-Player 1 won!
+Player 1 guessing Attribute Hat 2
+Player 2 answering false
+Player 2 guessing Person  P13
+Player 1 answering true
+Player 2 won!

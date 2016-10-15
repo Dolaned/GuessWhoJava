@@ -33,6 +33,8 @@ public class FileHandler {
         this.attributePairs = attributePairs;
     }
 
+    //this parse file function splits the file on spaces and counts the amount of words in the line
+    //by doing this it is able to work out whether a line is a person or the attribute set.
     public void parseFile(String fileName) throws IOException {
 
 

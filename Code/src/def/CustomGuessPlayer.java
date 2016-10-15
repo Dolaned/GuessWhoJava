@@ -4,23 +4,24 @@ import classes.AttributePair;
 import classes.FileHandler;
 import classes.Person;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
 
 /**
- * Your customised guessing player.
- * This player is for bonus task.
- *
+ * Custom-search based guessing player.
+ * This player is for task C bonus.
+ * <p>
  * You may implement/extend other interfaces or classes, but ensure ultimately
  * that this class implements the def.Player interface (directly or indirectly).
  */
-@SuppressWarnings("ALL")
-public class CustomGuessPlayer implements Player
-{
+public class CustomGuessPlayer implements Player {
+
     //collection of people to guess from
     private ConcurrentHashMap<String, Person> peopleMap = new ConcurrentHashMap<>();
     private Integer[] pairCount;
+
+    private ArrayList<AttributePair> guessed = new ArrayList<>();
 
     //collection of attribute pairs the above might have
     private ArrayList<AttributePair> attributePairs = new ArrayList<>();
@@ -32,16 +33,13 @@ public class CustomGuessPlayer implements Player
      * person.
      *
      * @param gameFilename Filename of game configuration.
-     * @param chosenName Name of the chosen person for this player.
+     * @param chosenName   Name of the chosen person for this player.
      * @throws IOException If there are IO issues with loading of gameFilename.
-     *    Note you can handle IOException within the constructor and remove
-     *    the "throws IOException" method specification, but make sure your
-     *    implementation exits gracefully if an IOException is thrown.
+     *                     Note you can handle IOException within the constructor and remove
+     *                     the "throws IOException" method specification, but make sure your
+     *                     implementation exits gracefully if an IOException is thrown.
      */
-    public CustomGuessPlayer(String gameFilename, String chosenName)
-        throws IOException
-    {
-
+    public CustomGuessPlayer(String gameFilename, String chosenName) {
         FileHandler fileHandler = new FileHandler();
 
         try {
@@ -56,35 +54,131 @@ public class CustomGuessPlayer implements Player
         //assign the current player to one of the inputted players.
         this.currentPlayer = peopleMap.get(chosenName);
 
-        //calculate and sort the attribute occurences per player.
-        this.calcAndSortOccurences();
-    } // end of def.CustomGuessPlayer()
+    } // end of BinaryGuessPlayer()
+
+
+    public void setupArray(){
+
+        this.pairCount = new Integer[this.attributePairs.size()];
+        // Sorting the arraylist.
+
+        for (int i = 0; i < this.attributePairs.size(); i++) {
+            this.pairCount[i] = this.attributePairs.get(i).getOccurence();
+        }
+    }
 
 
     public Guess guess() {
+        //the meat and potatoes of the algorithm
+        //the guess function is broken up into to parts
+        //Part 1 -- Iterate through the remaining people in the set and grab all there attribute
+        //       -- Keep a tally of these attributes and how many times they occur
+        //
+        //Part 2 -- Go through the map of viable attribute guesses to find the best guess
+        //       -- the "best guess" is an attribute that occurs in half of the remaining people
+        //       -- If there isn't an attribute that occurs exactly that amount, select the one that is the closest
+        HashMap<String, Integer> tempAP = new HashMap<>();
+        Boolean invalidQuestion;
 
-        this.calcAndSortOccurences();
-        //perform binary search for most optimal result
-        if (peopleMap.size() > 3) {
-            int guess = peopleMap.size() / 2;
-            System.out.println(guess);
-            AttributePair nextGuess = this.attributePairs.get(binarySearch(50));
-            return new Guess(Guess.GuessType.Attribute, nextGuess.getAttribute(), nextGuess.getValue());
+        String keyString;
 
-        } else {//take a guess its 50/50
+        int counter;
+
+        //my turn for a TRIPLE NESTED FOR LOOP; BOO-YAH!
+        //PART 1 -- building <attribute, occurance> map
+        for (Map.Entry<String, Person> personEntry : peopleMap.entrySet())
+        {
+            for (AttributePair p : personEntry.getValue().getPairs())
+            {
+                invalidQuestion = false;
+                for(AttributePair p2 : guessed)
+                {
+                    if((p.getAttribute().equals(p2.getAttribute())) && (p.getValue().equals(p2.getValue())))
+                    {
+                        invalidQuestion = true;
+                    }
+                }
+
+                if(!invalidQuestion)
+                {
+                    keyString = p.getAttribute();
+                    keyString = keyString.concat(" ");
+                    keyString = keyString.concat(p.getValue());
+                    if(tempAP.get(keyString) == null)
+                    {
+                        counter = 0;
+                    }
+                    else
+                    {
+                        counter = tempAP.get(keyString);
+                    }
+                    counter = counter + 1;
+                    tempAP.put(keyString, counter);
+                }
+            }
+        }
+        // Find the ideal guess amount an initailise the best guess
+        int idealGuess = peopleMap.size()/2;
+        AttributePair bestGuess = null;
+        String apValue, apAttribute;
+
+        //PART 2 -- find the attribute that represents the best guess to cut the number of remaining people
+        //       -- if there is only 1 person remaining in the peopleMap, guess that person
+        if(peopleMap.size() > 2)
+        {
+            for(Map.Entry<String, Integer> ap: tempAP.entrySet())
+            {
+                String[] apResult = ap.getKey().split("\\s");
+                apAttribute = apResult[0];
+                apValue = apResult[1];
+                //System.out.println("---" +apAttribute +" "+ apValue +" "+ ap.getValue() +" "+ idealGuess);
+                if(ap.getValue() == idealGuess)
+                {
+                    guessed.add(new AttributePair(apAttribute, apValue));
+                    return new Guess(Guess.GuessType.Attribute, apAttribute, apValue);
+                }
+                else
+                {
+                    if(bestGuess== null)
+                    {
+                        bestGuess = new AttributePair(apAttribute, apValue);
+                    }
+                    else
+                    {
+                        String currBest = bestGuess.getAttribute();
+                        currBest = currBest.concat(" ");
+                        currBest = currBest.concat(bestGuess.getValue());
+                        if(Math.abs(idealGuess - tempAP.get(currBest)) > Math.abs(idealGuess - ap.getValue()))
+                        {
+                            bestGuess = new AttributePair(apAttribute, apValue);
+                        }
+                    }
+                }
+            }
+            guessed.add(bestGuess);
+            return new Guess(Guess.GuessType.Attribute, bestGuess.getAttribute(), bestGuess.getValue());
+        }
+        else
+        {
             return new Guess(Guess.GuessType.Person, "", peopleMap.entrySet().iterator().next().getKey());
         }
+
     } // end of guess()
 
 
     public boolean answer(Guess currGuess) {
         Boolean retValue = false;
 
-        if (currGuess.getType() == Guess.GuessType.Person) {
-            if (currGuess.getValue().equals(this.currentPlayer.getPlayerName())) {
+        //check if person guess was true or the attribute guess is true and return
+        if (currGuess.getType() == Guess.GuessType.Person)
+        {
+            if (currGuess.getValue().equals(this.currentPlayer.getPlayerName()))
+            {
                 retValue = true;
             }
-        } else {
+        }
+        else
+        {
             retValue = currentPlayer.hasAttributePair(new AttributePair(currGuess.getAttribute(), currGuess.getValue()));
         }
         return retValue;
@@ -92,113 +186,46 @@ public class CustomGuessPlayer implements Player
 
 
     public boolean receiveAnswer(Guess currGuess, boolean answer) {
-
-        if (currGuess.getType() == Guess.GuessType.Person) {
-            if (answer) {
+        //recieving answer to update the peopleMap of remaining valid people options
+        //first check if the guess is an person or attribute guess
+        if(currGuess.getType() == Guess.GuessType.Person)
+        {
+            if (answer)
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 this.peopleMap.remove(currGuess.getValue());
             }
-        } else {
-            removeQuestions(currGuess, answer);
         }
-        // placeholder, replace
-        return false;
-    } // end of receiveAnswer()
-
-
-    private boolean pairsMatch(AttributePair pair1, AttributePair pair2) {
-        if (pair1.getAttribute().equals(pair2.getAttribute())) {
-            if (pair1.getValue().equals(pair2.getValue())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private int binarySearch(int key) {
-        int low = 0;
-        int high = this.attributePairs.size();
-
-        while (high >= low) {
-
-            int middle = (low + high) / 2;
-            if(middle >= attributePairs.size()){
-                return attributePairs.size()-1;
-            }
-            //System.out.println(low + "<low |<mid>"+middle+" <key> " +key+"|  high>" + high);
-            if (this.attributePairs.get(middle).getOccurence() == key) {
-                return middle;
-            }
-            if (this.attributePairs.get(middle).getOccurence() < key) {
-                low = middle + 1;
-            }
-            if (this.attributePairs.get(middle).getOccurence() > key) {
-                high = middle - 1;
-            }
-        }
-
-        return low;
-    }
-
-    private void removeQuestions(Guess guess, Boolean answer) {
-
-        ArrayList<String> marked = new ArrayList<>();
-
-        for (Map.Entry<String, Person> entry : this.peopleMap.entrySet()) {
-
-            Person p = entry.getValue();
-            Boolean hasAttribute = !answer;
-            if (p.hasAttributePair(new AttributePair(guess.getAttribute(), guess.getValue()))) {
-                hasAttribute = !hasAttribute;
-            }
-            if (!hasAttribute) {
-                marked.add(entry.getKey());
-            }
-        }
-        for (String s : marked) {
-            this.peopleMap.remove(s);
-        }
-
-        Iterator<AttributePair> iter = this.attributePairs.iterator();
-        while (iter.hasNext()) {
-            AttributePair pair = iter.next();
-
-            if (pair.getAttribute().equals(guess.getAttribute()) || pair.getOccurence() > this.peopleMap.size() / 2)
-                iter.remove();
-        }
-    }
-
-    private void calcAndSortOccurences() {
-        // this is horrible but works.
-        for (Map.Entry<String, Person> personEntry : peopleMap.entrySet()) {
-            for (AttributePair attributePair : attributePairs) {
-                for (AttributePair p : personEntry.getValue().getPairs()) {
-                    if (pairsMatch(p, attributePair)) {
-                        double occ = attributePair.getOccurence();
-                        attributePair.setOccurence(occ + 1.0);
+        else
+        {
+            //if attribute guess iterate through the remaining peopl in the MAp
+            //then check if that person either contain or didn't contain the attribute
+            //and then remove or preseve depending on the answer to the guess
+            for(Map.Entry<String, Person> tempPerson : this.peopleMap.entrySet())
+            {
+                Person p = tempPerson.getValue();
+                AttributePair ap = new AttributePair(currGuess.getAttribute(), currGuess.getValue());
+                if(p.hasAttributePair(ap))
+                {
+                    if(!answer)
+                    {
+                        this.peopleMap.remove(tempPerson.getKey());
+                    }
+                }
+                else
+                {
+                    if(answer)
+                    {
+                        this.peopleMap.remove(tempPerson.getKey());
                     }
                 }
             }
         }
 
-        Collections.sort(attributePairs, new Comparator<AttributePair>() {
-            @Override
-            public int compare(AttributePair o1, AttributePair o2) {
-                return o1.getOccurence().compareTo(o2.getOccurence());
-            }
-        });
+        return false;
+    } // end of receiveAnswer()
 
-        Iterator<AttributePair> iter = this.attributePairs.iterator();
-        while (iter.hasNext()) {
-            AttributePair pair = iter.next();
-
-            if(pair.getOccurence() == 0) {
-                iter.remove();
-            }else{
-                pair.setOccurence(pair.getOccurence() / peopleMap.size() * 100);
-            }
-        }
-    }
-
-} // end of class def.CustomGuessPlayer
+} // end of class BinaryGuessPlayer

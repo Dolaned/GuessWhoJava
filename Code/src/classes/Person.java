@@ -1,7 +1,5 @@
 package classes;
 
-import classes.AttributePair;
-
 import java.util.ArrayList;
 
 /**
@@ -9,15 +7,19 @@ import java.util.ArrayList;
  */
 public class Person {
 
+    //this is the player name
     private String playerName;
+    //this is the collection of its attribute pairs.
     private ArrayList<AttributePair> pairs;
 
-    public Person(String playerName){
+    //constructor for the person
+    public Person(String playerName) {
         this.playerName = playerName;
         pairs = new ArrayList<>();
     }
 
-    public Boolean hasAttributePair(AttributePair pair){
+    //checks if the current player has given attribute.
+    public Boolean hasAttributePair(AttributePair pair) {
 
         for (AttributePair pair2 : this.pairs) {
             if (pair2.getAttribute().equals(pair.getAttribute())) {
@@ -30,22 +32,17 @@ public class Person {
     }
 
 
-    public void addattributePair(AttributePair pair){
+    //pushes attribute pair to player.
+    public void addattributePair(AttributePair pair) {
         this.pairs.add(pair);
     }
 
+    //get pair collection
     public ArrayList<AttributePair> getPairs() {
         return pairs;
     }
 
-    public void setPairs(ArrayList<AttributePair> pairs) {
-        this.pairs = pairs;
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
+    //gets player name
     public String getPlayerName() {
         return playerName;
     }
