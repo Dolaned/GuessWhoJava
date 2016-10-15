@@ -59,5 +59,6 @@ public class AttributePair {
     public AttributePair(String attribute, String value){
         this.attribute = attribute;
         this.value = value;
+        this.id = UUID.randomUUID();
     }
 }
