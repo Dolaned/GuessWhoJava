@@ -1,0 +1,16 @@
+Round 1
+Player 1 guessing Attribute Armor 2
+Player 2 answering false
+Player 2 guessing Attribute Armor 2
+Player 1 answering false
+Round 2
+Player 1 guessing Attribute Armor 1
+Player 2 answering true
+Player 2 guessing Attribute Armor 1
+Player 1 answering true
+Round 3
+Player 1 guessing Person  P10
+Player 2 answering true
+Player 2 guessing Person  P10
+Player 1 answering true
+It's a tie!

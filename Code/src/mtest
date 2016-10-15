@@ -1,21 +1,31 @@
 Round 1
-Player 1 guessing Attribute noseShape white
-Player 2 answering true
-Player 2 guessing Attribute noseShape white
+Player 1 guessing Attribute Armor 2
+Player 2 answering false
+Player 2 guessing Attribute Armor 2
 Player 1 answering false
 Round 2
-Player 1 guessing Attribute faceShape red
+Player 1 guessing Attribute Armor 1
 Player 2 answering false
-Player 2 guessing Attribute hairColor brown
+Player 2 guessing Attribute Armor 1
 Player 1 answering false
 Round 3
-Player 1 guessing Attribute pimples blue
+Player 1 guessing Attribute Armor 4
 Player 2 answering false
-Player 2 guessing Attribute pimples blue
-Player 1 answering true
+Player 2 guessing Attribute Armor 4
+Player 1 answering false
 Round 4
-Player 1 guessing Attribute hat yellow
+Player 1 guessing Attribute Armor 3
+Player 2 answering true
+Player 2 guessing Attribute Armor 3
+Player 1 answering false
+Round 5
+Player 1 guessing Attribute MP 1
 Player 2 answering false
-Player 2 guessing Person  P3
-Player 1 answering true
-Player 2 won!
+Player 2 guessing Attribute Armor 10
+Player 1 answering false
+Round 6
+Player 1 guessing Person  P4
+Player 2 answering true
+Player 2 guessing Attribute Pet 3
+Player 1 answering false
+Player 1 won!

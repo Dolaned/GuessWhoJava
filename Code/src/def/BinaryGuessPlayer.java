@@ -69,7 +69,14 @@ public class BinaryGuessPlayer implements Player {
 
 
     public Guess guess() {
-        
+        //the meat and potatoes of the algorithm
+        //the guess function is broken up into to parts
+        //Part 1 -- Iterate through the remaining people in the set and grab all there attribute
+        //       -- Keep a tally of these attributes and how many times they occur
+        //
+        //Part 2 -- Go through the map of viable attribute guesses to find the best guess
+        //       -- the "best guess" is an attribute that occurs in half of the remaining people
+        //       -- If there isn't an attribute that occurs exactly that amount, select the one that is the closest
         HashMap<String, Integer> tempAP = new HashMap<>();
         Boolean invalidQuestion; 
 
@@ -78,68 +85,77 @@ public class BinaryGuessPlayer implements Player {
         int counter;
 
         //my turn for a TRIPLE NESTED FOR LOOP; BOO-YAH!
-        for (Map.Entry<String, Person> personEntry : peopleMap.entrySet()) {
-            for (AttributePair p : personEntry.getValue().getPairs()) {
+        //PART 1 -- building <attribute, occurance> map
+        for (Map.Entry<String, Person> personEntry : peopleMap.entrySet()) 
+        {
+            for (AttributePair p : personEntry.getValue().getPairs()) 
+            {
                 invalidQuestion = false;
-                //System.out.println("checking Q ++"+p.getAttribute()+p.getValue());
-                for(AttributePair p2 : guessed){
-                    if((p.getAttribute().equals(p2.getAttribute())) && (p.getValue().equals(p2.getValue()))){
-                       // System.out.println("not adding question "+ p.getAttribute() + p.getValue());
+                for(AttributePair p2 : guessed)
+                {
+                    if((p.getAttribute().equals(p2.getAttribute())) && (p.getValue().equals(p2.getValue())))
+                    {
                         invalidQuestion = true;
                     }
                 }
                 
-                if(!invalidQuestion){
+                if(!invalidQuestion)
+                {
                     keyString = p.getAttribute();
                     keyString = keyString.concat(" ");
                     keyString = keyString.concat(p.getValue());
-                    if(tempAP.get(keyString) == null){
+                    if(tempAP.get(keyString) == null)
+                    {
                         counter = 0;
                     }
-                    else{
+                    else
+                    {
                         counter = tempAP.get(keyString);
-                       // System.out.println("^^^^^^^ " +counter);
                     }
-                    //System.out.println("adding Q ++"+keyString+counter);
                     counter = counter + 1;
                     tempAP.put(keyString, counter);
                 }
             }
         }
-       /* try{
-            Thread.sleep(1000);
-        }catch(Exception e){
-            }*/
+        // Find the ideal guess amount an initailise the best guess
         int idealGuess = peopleMap.size()/2;
         AttributePair bestGuess = null;
         String apValue, apAttribute;
 
-        //System.out.println(tempAP.size());
-        if(peopleMap.size() > 1){
-            for(Map.Entry<String, Integer> ap: tempAP.entrySet()){
+        //PART 2 -- find the attribute that represents the best guess to cut the number of remaining people
+        //       -- if there is only 1 person remaining in the peopleMap, guess that person
+        if(peopleMap.size() > 1)
+        {
+            for(Map.Entry<String, Integer> ap: tempAP.entrySet())
+            {
                 String[] apResult = ap.getKey().split("\\s");
                 apAttribute = apResult[0];
                 apValue = apResult[1];
-                if(ap.getValue() == idealGuess){
+                if(ap.getValue() == idealGuess)
+                {
                     guessed.add(new AttributePair(apAttribute, apValue));
                     return new Guess(Guess.GuessType.Attribute, apAttribute, apValue);
                 }
-                else{
-                    if(bestGuess== null){
+                else
+                {
+                    if(bestGuess== null)
+                    {
                         bestGuess = new AttributePair(apAttribute, apValue);
                     }
-                    else{
-                        if(Math.abs(idealGuess - tempAP.get(ap.getKey())) > Math.abs(idealGuess - ap.getValue())){
+                    else
+                    {
+                        if(Math.abs(idealGuess - tempAP.get(ap.getKey())) > Math.abs(idealGuess - ap.getValue()))
+                        {
                             bestGuess = new AttributePair(apAttribute, apValue);
                         }
                     }
                  }
              }
-             //System.out.println("best guess guessing " + bestGuess.getAttribute() + "==" + bestGuess.getValue());
              guessed.add(bestGuess);
              return new Guess(Guess.GuessType.Attribute, bestGuess.getAttribute(), bestGuess.getValue());
          }
-         else{
+         else
+         {
              return new Guess(Guess.GuessType.Person, "", peopleMap.entrySet().iterator().next().getKey());
          }
         
@@ -148,12 +164,17 @@ public class BinaryGuessPlayer implements Player {
 
     public boolean answer(Guess currGuess) {
         Boolean retValue = false;
-
-        if (currGuess.getType() == Guess.GuessType.Person) {
-            if (currGuess.getValue().equals(this.currentPlayer.getPlayerName())) {
+        
+        //check if person guess was true or the attribute guess is true and return
+        if (currGuess.getType() == Guess.GuessType.Person) 
+        {
+            if (currGuess.getValue().equals(this.currentPlayer.getPlayerName())) 
+            {
                 retValue = true;
             }
-        } else {
+        }
+        else 
+        {
             retValue = currentPlayer.hasAttributePair(new AttributePair(currGuess.getAttribute(), currGuess.getValue()));
         }
         return retValue;
@@ -161,28 +182,39 @@ public class BinaryGuessPlayer implements Player {
 
 
     public boolean receiveAnswer(Guess currGuess, boolean answer) {
-
-        if(currGuess.getType() == Guess.GuessType.Person){
-            if (answer){
+        //recieving answer to update the peopleMap of remaining valid people options
+        //first check if the guess is an person or attribute guess
+        if(currGuess.getType() == Guess.GuessType.Person)
+        {
+            if (answer)
+            {
                 return true;
             }
-            else{
+            else
+            {
                 this.peopleMap.remove(currGuess.getValue());
             }
         }
-        else{
-            for(Map.Entry<String, Person> tempPerson : this.peopleMap.entrySet()){
+        else
+        {
+            //if attribute guess iterate through the remaining peopl in the MAp
+            //then check if that person either contain or didn't contain the attribute
+            //and then remove or preseve depending on the answer to the guess
+            for(Map.Entry<String, Person> tempPerson : this.peopleMap.entrySet())
+            {
                 Person p = tempPerson.getValue();
                 AttributePair ap = new AttributePair(currGuess.getAttribute(), currGuess.getValue());
-                if(p.hasAttributePair(ap)){
-                    if(!answer){
-                        //System.out.print("removed persn " + tempPerson.getKey());
+                if(p.hasAttributePair(ap))
+                {
+                    if(!answer)
+                    {
                         this.peopleMap.remove(tempPerson.getKey());
                     }
                 }    
-                else{
-                    if(answer){
-                       // System.out.print("removed persn " + tempPerson.getKey());
+                else
+                {
+                    if(answer)
+                    {
                         this.peopleMap.remove(tempPerson.getKey());
                     }
                 }
