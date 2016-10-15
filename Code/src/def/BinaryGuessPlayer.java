@@ -14,6 +14,9 @@ import java.util.concurrent.*;
  * <p>
  * You may implement/extend other interfaces or classes, but ensure ultimately
  * that this class implements the def.Player interface (directly or indirectly).
+ *
+ * AUTHOR MICHAEL BANNISTER s3283455
+ * Algorithms and Analysis semester 2 2016
  */
 public class BinaryGuessPlayer implements Player {
 
@@ -21,11 +24,12 @@ public class BinaryGuessPlayer implements Player {
     private ConcurrentHashMap<String, Person> peopleMap = new ConcurrentHashMap<>();
     private Integer[] pairCount;
 
+    //array of attribute pairs that have already been guessed(as not to guess again)
     private ArrayList<AttributePair> guessed = new ArrayList<>();
 
     //collection of attribute pairs the above might have
     private ArrayList<AttributePair> attributePairs = new ArrayList<>();
-    //current lpayer selected
+    //current player selected
     private Person currentPlayer;
 
     /**
@@ -71,7 +75,7 @@ public class BinaryGuessPlayer implements Player {
     public Guess guess() {
         //the meat and potatoes of the algorithm
         //the guess function is broken up into to parts
-        //Part 1 -- Iterate through the remaining people in the set and grab all there attribute
+        //Part 1 -- Iterate through the remaining people in the set and grab all their attributes
         //       -- Keep a tally of these attributes and how many times they occur
         //
         //Part 2 -- Go through the map of viable attribute guesses to find the best guess
@@ -86,6 +90,8 @@ public class BinaryGuessPlayer implements Player {
 
         //my turn for a TRIPLE NESTED FOR LOOP; BOO-YAH!
         //PART 1 -- building <attribute, occurance> map
+        //       -- for every person remaining, get all there attributes (have they already been guessed?), then
+        //          build a map of everytime they occur in the remaining people (the code in english)
         for (Map.Entry<String, Person> personEntry : peopleMap.entrySet()) 
         {
             for (AttributePair p : personEntry.getValue().getPairs()) 
