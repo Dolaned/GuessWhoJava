@@ -131,6 +131,7 @@ public class BinaryGuessPlayer implements Player {
                 String[] apResult = ap.getKey().split("\\s");
                 apAttribute = apResult[0];
                 apValue = apResult[1];
+                //System.out.println("---" +apAttribute +" "+ apValue +" "+ ap.getValue() +" "+ idealGuess);
                 if(ap.getValue() == idealGuess)
                 {
                     guessed.add(new AttributePair(apAttribute, apValue));
@@ -144,7 +145,10 @@ public class BinaryGuessPlayer implements Player {
                     }
                     else
                     {
-                        if(Math.abs(idealGuess - tempAP.get(ap.getKey())) > Math.abs(idealGuess - ap.getValue()))
+                        String currBest = bestGuess.getAttribute();
+                        currBest = currBest.concat(" ");
+                        currBest = currBest.concat(bestGuess.getValue());
+                        if(Math.abs(idealGuess - tempAP.get(currBest)) > Math.abs(idealGuess - ap.getValue()))
                         {
                             bestGuess = new AttributePair(apAttribute, apValue);
                         }
