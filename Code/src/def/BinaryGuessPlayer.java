@@ -145,7 +145,7 @@ public class BinaryGuessPlayer implements Player {
         }
         // If the search value is greater than or equal to the upper bound, assign the upper bound
         else if (search_val >= this.attributePairs.get(this.attributePairs.size() - 1).getChance()) {
-            return this.attributePairs.indexOf(this.attributePairs.get(this.attributePairs.size()-1));
+            return this.attributePairs.indexOf(this.attributePairs.get(this.attributePairs.size() - 1));
         }
 
         // Find the bisection of the sub-tree for the search value (low and high)
@@ -174,14 +174,13 @@ public class BinaryGuessPlayer implements Player {
 
         for (Map.Entry<String, Person> entry : this.peopleMap.entrySet()) {
 
-            if(entry.getValue().hasAttributePair(new AttributePair(guess.getAttribute(), guess.getValue()))){
-                if(!answer){
+            if (entry.getValue().hasAttributePair(new AttributePair(guess.getAttribute(), guess.getValue()))) {
+                if (!answer) {
                     //System.out.print("removed persn " + tempPerson.getKey());
                     this.peopleMap.remove(entry.getKey());
                 }
-            }
-            else{
-                if(answer){
+            } else {
+                if (answer) {
                     // System.out.print("removed persn " + tempPerson.getKey());
                     this.peopleMap.remove(entry.getKey());
                 }
@@ -227,12 +226,7 @@ public class BinaryGuessPlayer implements Player {
             if (pair.getOccurence() == 0) {
                 iter.remove();
             } else {
-                //System.out.println("Pair Occ : "+ pair.getOccurence());
-
-
                 pair.setChance((int) (Math.abs(pair.getOccurence() / peopleMap.size()) * 100));
-                //System.out.println("pair after calc : " + pair.getChance());
-                //System.out.println("People map size: " + peopleMap.size());
             }
         }
     }
